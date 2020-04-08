@@ -22,4 +22,14 @@ char **getargs(char *buff, ssize_t num_read);
 
 /* functions fail fork*/
 void fail_fork(void);
+
+/* functions copy a string */
+char *_strncpy(char *dest, char *src, int n);
+
+/* functions count a string */
+int _strlen(char *s);
+
+/* functions duplicates a string */
+char *_strdup(char *str);
+
 #endif /*_HOLBERTON_H_ */
