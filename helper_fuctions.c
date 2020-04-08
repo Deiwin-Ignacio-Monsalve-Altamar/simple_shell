@@ -6,24 +6,30 @@
  * @num_read: string character numbers
  * Return: pointer to string with arguments
  */
-char **getargs(char *buff, ssize_t num_read)
+char **getargs(char *buff)
 {
 	char *token, **args;
 	int count;
 
-	args = malloc(sizeof(char *));
-	*args = malloc(sizeof(char) * num_read);
-	if (args != NULL)
+	buff[strlen(buff) - 1] = '\0';
+	
+	args = malloc(sizeof(char *) * (6 + 1));
+	if (args == NULL)
 	{
-		free(args);
-		free(*args);
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(buff, "\n");
+		return (NULL);		
+	} 
+	token = strtok(buff, " \n");
 	for (count = 0; token != NULL; count++)
 	{
-		args[count] = token;
-		token = strtok(NULL, "\n");
+		printf("%s\n", token);
+		args[count] = malloc(strlen(token) + 1);
+		if (args[count] == NULL)
+		{
+			free(args);
+			return (NULL);
+		}
+		strncpy(args[count], token, strlen(token) + 1);
+		token = strtok(NULL, " \n");
 	}
 	args[count] = NULL;
 	return (args);
