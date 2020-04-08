@@ -20,4 +20,6 @@ void dobfreer(char **capt);
 /*get arguments in functions*/
 char **getargs(char *buff, ssize_t num_read);
 
+/* functions fail fork*/
+void fail_fork(void);
 #endif /*_HOLBERTON_H_ */
