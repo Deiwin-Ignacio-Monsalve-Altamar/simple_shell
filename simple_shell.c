@@ -14,21 +14,22 @@ int main(void)
 	char **capt = NULL, *buff = NULL;
 	int status;
 
+	printf("$ ");
 	while (1)
 	{
-		printf("$ ");
+		
 		buff = (char *)malloc(sizeof(size));
 		if (buff == NULL)
 		{
-			free(buzz);
+			free(buff);
 			continue;
 		}
 		num_read = getline(&buff, &size, stdin);
 		if (num_read == -1)
-			freerror1(*buff);
+			freerror1(buff);
 		pid = fork();
 		if (pid == -1)
-			freerror1(*buff);
+			freerror1(buff);
 		if (pid == 0)
 		{
 			capt = malloc(sizeof(char *));
@@ -41,10 +42,14 @@ int main(void)
 			}
 			capt = getargs(buff, num_read);
 			if (execve(capt[0], capt, NULL) == -1)
-				dobfreer(**capt);
+				free(*capt);
 		}
-		wait(&status);
-		free(buff);
+		else
+		{
+			wait(&status);
+			free(buff);
+		}
+		printf("$ ");
 	}
 	return (0);
 }
