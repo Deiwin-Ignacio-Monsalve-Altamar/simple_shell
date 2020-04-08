@@ -18,7 +18,7 @@ void freerror1(char *buff);
 void dobfreer(char **capt);
 
 /*get arguments in functions*/
-char **getargs(char *buff, ssize_t num_read);
+char **getargs(char *buff);
 
 /* functions fail fork*/
 void fail_fork(void);

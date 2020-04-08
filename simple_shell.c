@@ -1,5 +1,10 @@
 #include "holberton.h"
 
+void thander(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
 /**
  * main - execve example
  *
@@ -7,30 +12,24 @@
  */
 int	main(void)
 {
-    char *line;
+    char *line = NULL;
     size_t len = 0;
-    int status;
+    int status, read = 0;
     pid_t pid;
-    char *text[2], *token;
+    char **text, *token;
 
-    text[1] = NULL;
-    line = malloc(sizeof(char));
-    if (line == NULL)
-    {
-        return (0);
-    }
     printf("#cisfun$ ");
-	getline(&line, &len, stdin);
-    while (1)
+    read = getline(&line, &len, stdin);
+    while (read > 1)
     {
-        token = strtok(line, "\n");
-        text[0] = token;
         
-		
+        text = getargs(line);
+        
         pid = fork();
         if (pid == -1)
         {
-            fail_fork();
+            perror("Error");
+            return (1);
         }
         
         if (pid == 0)
@@ -44,10 +43,12 @@ int	main(void)
         {
             wait(&status);
         }
-          
+        
         printf("#cisfun$ ");
         getline(&line, &len, stdin);
     }
-    free(line);
+	free(line);
+    if (character == -1)
+		exit(EXIT_FAILURE);
     return (0);
 }
