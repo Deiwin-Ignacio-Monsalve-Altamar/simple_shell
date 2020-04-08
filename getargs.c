@@ -18,11 +18,11 @@ char **getargs(char *buff, ssize_t num_read)
 		free(*args);
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(buff, " \n");
+	token = strtok(buff, "\n");
 	for (count = 0; token != NULL; count++)
 	{
 		args[count] = token;
-		token = strtok(NULL, " \n");
+		token = strtok(NULL, "\n");
 	}
 	args[count] = NULL;
 	return (args);
