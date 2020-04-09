@@ -35,4 +35,7 @@ char *_strdup(char *str);
 /* functions count the tokens */
 size_t contokens(char *buff);
 
+/* function that compares 2 strings */
+int _strcmp(char *s1, char *s2);
+
 #endif /*_HOLBERTON_H_ */
