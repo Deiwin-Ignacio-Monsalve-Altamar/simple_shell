@@ -9,11 +9,11 @@ int	main(int argc, char **argv, char **env)
     char *line = NULL;
     size_t len = 0;
     int status, tmp = 0;
-    pid_t pid; struct stat file;
+    pid_t pid;
     char **text;
 
     write(STDOUT_FILENO, "Holber->$ ", 10);
-  
+
     while ((tmp = getline(&line, &len, stdin)))
     {
         if (tmp == EOF)
@@ -35,20 +35,17 @@ int	main(int argc, char **argv, char **env)
                 free(line);
                 exit(EXIT_SUCCESS);
             }
-
-            if (stat(text[0], &file) == 0)
-                execve(text[0], text, NULL);
+            else if ((execve(text[0], text, NULL)) == -1)
+                perror("Error");
         }
         else
         {
             wait(&status);
         }
-        
         len = 0; line = NULL;
-        write(STDOUT_FILENO, "Holber->$ ", 10);
+        write(STDOUT_FILENO, "Holber->$ ", 10);    
     }
-    if (tmp == -1)
+	if (tmp == -1)
 		exit(EXIT_FAILURE);
-	free(line);
     return (0);
 }
