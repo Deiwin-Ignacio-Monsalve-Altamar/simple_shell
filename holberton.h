@@ -37,5 +37,7 @@ size_t contokens(char *buff);
 
 /* function that compares 2 strings */
 int _strcmp(char *s1, char *s2);
-
+void prompt(void);
+char *_getline(void);
+int execute(char **buffer, char **av);
 #endif /*_HOLBERTON_H_ */
