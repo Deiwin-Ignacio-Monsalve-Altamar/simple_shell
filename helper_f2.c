@@ -11,9 +11,9 @@ size_t contokens(char *buff)
 	size_t count;
 	char *token, *aux_buff;
 
-	aux_buff = _strdup(char buff);
+	aux_buff = _strdup(buff);
 	token = strtok(buff, " \n");
-	for (count = 1; token != NULL, count++)
+	for (count = 0; token != NULL; count++)
 	{
 		token = strtok(NULL, " \n");
 	}

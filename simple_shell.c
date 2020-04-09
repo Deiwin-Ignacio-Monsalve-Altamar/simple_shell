@@ -10,8 +10,7 @@ int	main(int argc, char **argv, char **env)
     int status = 1;
     char **text;
 
-    do
-    {
+    do {
         prompt();
         line = _getline();
         if ((_strcmp(line, "\n")) == 0)
@@ -21,6 +20,6 @@ int	main(int argc, char **argv, char **env)
         text = getargs(line);
         status = execute(text, argv);
     } while (status);
-    
+    free(line);
    return (0);
 }
