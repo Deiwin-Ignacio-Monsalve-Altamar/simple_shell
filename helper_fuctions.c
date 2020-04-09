@@ -11,9 +11,9 @@ char **getargs(char *buff)
 	char *token, **args;
 	int count;
 
-	buff[strlen(buff) - 1] = '\0';
+	buff[_strlen(buff) - 1] = '\0';
 	
-	args = malloc(sizeof(char *) * (6 + 1));
+	args = malloc(sizeof(char *) * (3 + 1));
 	if (args == NULL)
 	{
 		return (NULL);		
@@ -21,14 +21,13 @@ char **getargs(char *buff)
 	token = strtok(buff, " \n");
 	for (count = 0; token != NULL; count++)
 	{
-		printf("%s\n", token);
-		args[count] = malloc(strlen(token) + 1);
+		args[count] = malloc(_strlen(token) + 1);
 		if (args[count] == NULL)
 		{
 			free(args);
 			return (NULL);
 		}
-		strncpy(args[count], token, strlen(token) + 1);
+		_strncpy(args[count], token, _strlen(token) + 1);
 		token = strtok(NULL, " \n");
 	}
 	args[count] = NULL;
