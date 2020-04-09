@@ -9,16 +9,17 @@
 char **getargs(char *buff)
 {
 	char *token, **args;
-	int count;
+	int count; unsigned int i;
 
 	buff[_strlen(buff) - 1] = '\0';
+	i = contokens(buff); 
 	
-	args = malloc(sizeof(char *) * (3 + 1));
+	args = malloc(sizeof(char *) * i);
 	if (args == NULL)
 	{
 		return (NULL);		
 	} 
-	token = strtok(buff, " \n");
+	token = strtok(buff, " ");
 	for (count = 0; token != NULL; count++)
 	{
 		args[count] = malloc(_strlen(token) + 1);
@@ -28,7 +29,7 @@ char **getargs(char *buff)
 			return (NULL);
 		}
 		_strncpy(args[count], token, _strlen(token) + 1);
-		token = strtok(NULL, " \n");
+		token = strtok(NULL, " ");
 	}
 	args[count] = NULL;
 	return (args);
