@@ -41,4 +41,60 @@ int _strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+/**
+ * contokens - count the tokens
+ * @buff: pointer to string
+ * Return: token numbers
+ */
+void prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+	{
+		write(1, "Holber->$ ", 10);
+	}
+}
+/**
+ * contokens - count the tokens
+ * @buff: pointer to string
+ * Return: token numbers
+ */
+char *_getline(void)
+{
+	int tmp;
+	char *line = NULL;
+	size_t size  = 0;
 
+	tmp = getline(&line, &size, stdin);
+	if (tmp == EOF)
+	{
+		if (isatty(STDIN_FILENO))
+			write(1, "\n", 1);
+		exit(0);
+	}
+	return (line);
+}
+/**
+ * contokens - count the tokens
+ * @buff: pointer to string
+ * Return: token numbers
+ */
+int execute(char **buffer, char **av)
+{
+	pid_t pid;
+	int status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(buffer[0], buffer, NULL) == -1)
+		{
+			perror(av[0]);
+			exit(0);
+		}
+	}
+	else
+	{
+		wait(&status);
+	}
+	return (1);
+}

@@ -7,45 +7,20 @@
 int	main(int argc, char **argv, char **env)
 {
     char *line = NULL;
-    size_t len = 0;
-    int status, tmp = 0;
-    pid_t pid;
+    int status = 1;
     char **text;
 
-    write(STDOUT_FILENO, "Holber->$ ", 10);
-
-    while ((tmp = getline(&line, &len, stdin)))
+    do
     {
-        if (tmp == EOF)
-        {
-            write(STDOUT_FILENO, "\n", 1);
-            free(line);
-            exit(0);
-        }
-        
+        prompt();
+        line = _getline();
+        if ((_strcmp(line, "\n")) == 0)
+	    {
+		    continue;
+	    }
         text = getargs(line);
-        
-        pid = fork();
-        if (pid == -1)
-            fail_fork();
-        if (pid == 0)
-        {
-            if (text == NULL)
-            {
-                free(line);
-                exit(EXIT_SUCCESS);
-            }
-            else if ((execve(text[0], text, NULL)) == -1)
-                perror("Error");
-        }
-        else
-        {
-            wait(&status);
-        }
-        len = 0; line = NULL;
-        write(STDOUT_FILENO, "Holber->$ ", 10);    
-    }
-	if (tmp == -1)
-		exit(EXIT_FAILURE);
-    return (0);
+        status = execute(text, argv);
+    } while (status);
+    
+   return (0);
 }
