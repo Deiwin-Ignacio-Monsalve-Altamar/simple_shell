@@ -1,54 +1,54 @@
 #include "holberton.h"
-
-void thander(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n$ ", 3);
-}
 /**
  * main - execve example
  *
  * Return: Always 0.
  */
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
     char *line = NULL;
     size_t len = 0;
-    int status, read = 0;
-    pid_t pid;
-    char **text, *token;
+    int status, tmp = 0;
+    pid_t pid; struct stat file;
+    char **text;
 
-    printf("#cisfun$ ");
-    read = getline(&line, &len, stdin);
-    while (read > 1)
+    write(STDOUT_FILENO, "Holber->$ ", 10);
+  
+    while ((tmp = getline(&line, &len, stdin)))
     {
+        if (tmp == EOF)
+        {
+            write(STDOUT_FILENO, "\n", 1);
+            free(line);
+            exit(0);
+        }
         
         text = getargs(line);
         
         pid = fork();
         if (pid == -1)
-        {
-            perror("Error");
-            return (1);
-        }
-        
+            fail_fork();
         if (pid == 0)
         {
-            if (execve(text[0], text, NULL) == -1)
+            if (text == NULL)
             {
-                perror("Error: \n");
+                free(line);
+                exit(EXIT_SUCCESS);
             }
+
+            if (stat(text[0], &file) == 0)
+                execve(text[0], text, NULL);
         }
         else
         {
             wait(&status);
         }
         
-        printf("#cisfun$ ");
-        getline(&line, &len, stdin);
+        len = 0; line = NULL;
+        write(STDOUT_FILENO, "Holber->$ ", 10);
     }
-	free(line);
-    if (character == -1)
+    if (tmp == -1)
 		exit(EXIT_FAILURE);
+	free(line);
     return (0);
 }
