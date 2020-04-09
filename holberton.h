@@ -32,4 +32,7 @@ int _strlen(char *s);
 /* functions duplicates a string */
 char *_strdup(char *str);
 
+/* functions count the tokens */
+size_t contokens(char *buff);
+
 #endif /*_HOLBERTON_H_ */
