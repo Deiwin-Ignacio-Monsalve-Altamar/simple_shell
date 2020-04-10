@@ -5,7 +5,7 @@
  * Return: void
  */
 
-void dobfreer(**capt)
+void dobfreer(char **capt)
 {
 	int count = 0;
 
@@ -15,6 +15,4 @@ void dobfreer(**capt)
 		count++;
 	}
 	free(capt);
-	perror("Error:");
-	exit(EXIT_FAILURE);
 }

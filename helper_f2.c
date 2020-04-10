@@ -13,7 +13,7 @@ size_t contokens(char *buff)
 
 	aux_buff = _strdup(buff);
 	token = strtok(buff, " \n");
-	for (count = 0; token != NULL; count++)
+	for (count = 1; token != NULL; count++)
 	{
 		token = strtok(NULL, " \n");
 	}
@@ -69,6 +69,7 @@ char *_getline(void)
 	{
 		if (isatty(STDIN_FILENO))
 			write(1, "\n", 1);
+		free(line);
 		exit(0);
 	}
 	return (line);
@@ -84,13 +85,19 @@ int execute(char **buffer, char **av)
 	int status;
 
 	pid = fork();
+	if (pid == -1)
+	{
+		fail_fork();	
+	}
 	if (pid == 0)
 	{
 		if (execve(buffer[0], buffer, NULL) == -1)
 		{
+			dobfreer(buffer);
 			perror(av[0]);
 			exit(0);
 		}
+		dobfreer(buffer);
 	}
 	else
 	{

@@ -19,7 +19,10 @@ int	main(int argc, char **argv, char **env)
 	    }
         text = getargs(line);
         status = execute(text, argv);
+	dobfreer(text);
+        free(line);
     } while (status);
     free(line);
+    dobfreer(text);
    return (0);
 }
