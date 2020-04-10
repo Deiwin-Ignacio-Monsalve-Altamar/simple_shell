@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <signal.h>
+#define DELIMI " \n\t\a"
 
 /* function free*/
 void freerror1(char *buff);
@@ -33,11 +34,11 @@ int _strlen(char *s);
 char *_strdup(char *str);
 
 /* functions count the tokens */
-size_t contokens(char *buff);
+int contokens(char *buff);
 
 /* function that compares 2 strings */
 int _strcmp(char *s1, char *s2);
 void prompt(void);
 char *_getline(void);
-int execute(char **buffer, char **av);
+int execute(char **buffer, char *av);
 #endif /*_HOLBERTON_H_ */

@@ -25,10 +25,10 @@ char **getargs(char *buff)
 		args[count] = malloc(_strlen(token) + 1);
 		if (args[count] == NULL)
 		{
-			 dobfreer(args);
+			dobfreer(args);
 			return (NULL);
 		}
-		_strncpy(args[count], token, _strlen(token) + 1);
+		strcpy(args[count], token);
 		token = strtok(NULL, " ");
 	}
 	args[count] = NULL;
