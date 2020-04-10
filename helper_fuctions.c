@@ -3,22 +3,21 @@
 /**
  * getargs - divide into arguments
  * @buff: pointer to string
- * @num_read: string character numbers
  * Return: pointer to string with arguments
  */
 char **getargs(char *buff)
 {
 	char *token, **args;
-	int count; unsigned int i;
+	int count;
+	unsigned int i;
 
 	buff[_strlen(buff) - 1] = '\0';
-	i = contokens(buff); 
-	
+	i = contokens(buff);
 	args = malloc(sizeof(char *) * i);
 	if (args == NULL)
 	{
-		return (NULL);		
-	} 
+		return (NULL);
+	}
 	token = strtok(buff, " ");
 	for (count = 0; token != NULL; count++)
 	{
