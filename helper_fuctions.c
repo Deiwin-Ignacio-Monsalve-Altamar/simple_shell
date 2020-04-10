@@ -25,7 +25,7 @@ char **getargs(char *buff)
 		args[count] = malloc(_strlen(token) + 1);
 		if (args[count] == NULL)
 		{
-			free(args);
+			 dobfreer(args);
 			return (NULL);
 		}
 		_strncpy(args[count], token, _strlen(token) + 1);
