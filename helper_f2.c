@@ -42,9 +42,8 @@ int _strcmp(char *s1, char *s2)
 	return (0);
 }
 /**
- * contokens - count the tokens
- * @buff: pointer to string
- * Return: token numbers
+ * prompt - function  that print the prompt
+ * Return: void
  */
 void prompt(void)
 {
@@ -54,9 +53,8 @@ void prompt(void)
 	}
 }
 /**
- * contokens - count the tokens
- * @buff: pointer to string
- * Return: token numbers
+ * _getline - count the tokens
+ * Return: pointer to the data entered by the user
  */
 char *_getline(void)
 {
@@ -74,10 +72,11 @@ char *_getline(void)
 	}
 	return (line);
 }
+
 /**
- * contokens - count the tokens
- * @buff: pointer to string
- * Return: token numbers
+ * execute - function  that fork and execute the user input
+ * @buff: pointer to string with data to execute
+ * Return: int
  */
 int execute(char **buffer, char *av)
 {
@@ -88,7 +87,7 @@ int execute(char **buffer, char *av)
 	if (pid == -1)
 	{
 		dobfreer(buffer);
-		fail_fork();	
+		fail_fork();
 	}
 	if (pid == 0)
 	{
