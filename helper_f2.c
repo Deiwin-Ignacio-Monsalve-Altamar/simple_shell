@@ -77,11 +77,13 @@ char *_getline(void)
  * execute - function  that fork and execute the user input
  * @buffer: pointer to string with data to execute
  * @av: string
+ * @line: data entered by userdata entered by user
+ * @env: pointer to Environment Variables
  * Return: int
  */
-int execute(char **buffer, char *av)
+int execute(char **buffer, char *av, char *line, char **env)
 {
-	pid_t pid;
+	pid_t pid; struct stat stark;
 	int status;
 
 	pid = fork();
@@ -92,12 +94,21 @@ int execute(char **buffer, char *av)
 	}
 	if (pid == 0)
 	{
-		if (execve(buffer[0], buffer, NULL) == -1)
+		if (buffer == NULL)
 		{
-			dobfreer(buffer);
-			perror(av);
-			exit(0);
+				dobfreer(buffer);
+				perror(av);
+				exit(0);
 		}
+		else if ((stat(buffer[0], &stark)) == 0)
+		{
+			execve(buffer[0], buffer, NULL);
+		}
+		else
+		{
+			path(buffer, line, env);
+		}
+		
 		dobfreer(buffer);
 	}
 	else

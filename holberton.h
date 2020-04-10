@@ -46,6 +46,17 @@ void prompt(void);
 char *_getline(void);
 
 /* function  that fork and execute the user input */
-int execute(char **buffer, char *av);
+int execute(char **buffer, char *av, char *line, char **env);
+
+void path(char **text, char *buffer, char **env);
+
+char **env_variable(char *text, char **env);
+
+char *getenv_(const char *name, char *str);
+
+char *_strcpytext(char *dest, char *str, char *text, int len1, int len2);
+char **addpath(char **text, char **env);
+
+int counter(char **env, char **text);
 
 #endif /*_HOLBERTON_H_ */

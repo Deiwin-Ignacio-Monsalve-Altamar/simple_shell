@@ -21,10 +21,8 @@ int	main(int argc, char **argv, char **env)
 		}
 
 		text = getargs(line);
+		status = execute(text, p, line, env);
 		free(line);
-
-		status = execute(text, p);
-
 		dobfreer(text);
 	} while (status);
 	free(line);
