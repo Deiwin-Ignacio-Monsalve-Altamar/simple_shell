@@ -38,7 +38,17 @@ int contokens(char *buff);
 
 /* function that compares 2 strings */
 int _strcmp(char *s1, char *s2);
+
+/* function that copy string */
+char *_strncpy(char *dest, char *src, int n);
+
+/* function  that print the prompt */
 void prompt(void);
+
+/* function  that fetches data from the user */
 char *_getline(void);
+
+/* function  that fork and execute the user input */
 int execute(char **buffer, char *av);
+
 #endif /*_HOLBERTON_H_ */
