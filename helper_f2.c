@@ -75,7 +75,8 @@ char *_getline(void)
 
 /**
  * execute - function  that fork and execute the user input
- * @buff: pointer to string with data to execute
+ * @buffer: pointer to string with data to execute
+ * @av: string
  * Return: int
  */
 int execute(char **buffer, char *av)
