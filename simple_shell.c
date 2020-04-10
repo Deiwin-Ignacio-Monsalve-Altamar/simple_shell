@@ -6,7 +6,7 @@
  */
 int	main(int argc, char **argv, char **env)
 {
-    char *line = NULL;
+    char *line = NULL, *p = argv[0];
     int status = 1;
     char **text;
 
@@ -17,10 +17,13 @@ int	main(int argc, char **argv, char **env)
 	    {
 		    continue;
 	    }
+
         text = getargs(line);
-        status = execute(text, argv);
-	dobfreer(text);
         free(line);
+
+        status = execute(text, p);
+        
+        dobfreer(text);
     } while (status);
     free(line);
     dobfreer(text);

@@ -6,9 +6,9 @@
  * Return: token numbers
  */
 
-size_t contokens(char *buff)
+int contokens(char *buff)
 {
-	size_t count;
+	int count;
 	char *token, *aux_buff;
 
 	aux_buff = _strdup(buff);
@@ -79,7 +79,7 @@ char *_getline(void)
  * @buff: pointer to string
  * Return: token numbers
  */
-int execute(char **buffer, char **av)
+int execute(char **buffer, char *av)
 {
 	pid_t pid;
 	int status;
@@ -87,6 +87,7 @@ int execute(char **buffer, char **av)
 	pid = fork();
 	if (pid == -1)
 	{
+		dobfreer(buffer);
 		fail_fork();	
 	}
 	if (pid == 0)
@@ -94,7 +95,7 @@ int execute(char **buffer, char **av)
 		if (execve(buffer[0], buffer, NULL) == -1)
 		{
 			dobfreer(buffer);
-			perror(av[0]);
+			perror(av);
 			exit(0);
 		}
 		dobfreer(buffer);
