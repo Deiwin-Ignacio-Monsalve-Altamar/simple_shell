@@ -10,7 +10,7 @@
 extern char **environ;
 int	main(int argc, char **argv)
 {
-	char *line = NULL, *p = argv[0];
+	char *line = NULL, *p = argv[0], *exit_com = "exit";
 	int status = 1;
 	char **text;
 
@@ -24,6 +24,11 @@ int	main(int argc, char **argv)
 
 		text = getargs(line);
 		free(line);
+		if ((_strcmp(exit_com, text[0])) == 0)
+		{
+			dobfreer(text);
+			exit(EXIT_SUCCESS);
+		}
 		status = execute(text, p, environ);
 		dobfreer(text);
 	} while (status);
