@@ -12,7 +12,7 @@ int contokens(char *buff)
 	char *token, *aux_buff;
 
 	aux_buff = _strdup(buff);
-	token = strtok(buff, " \n");
+	token = strtok(aux_buff, " \n");
 	for (count = 1; token != NULL; count++)
 	{
 		token = strtok(NULL, " \n");
@@ -81,10 +81,10 @@ char *_getline(void)
  * @env: pointer to Environment Variables
  * Return: int
  */
-int execute(char **buffer, char *av, char *line, char **env)
+int execute(char **buffer, char *av, char **env)
 {
 	pid_t pid; struct stat stark;
-	int status;
+	int status; char  *directory;
 
 	pid = fork();
 	if (pid == -1)
@@ -94,21 +94,20 @@ int execute(char **buffer, char *av, char *line, char **env)
 	}
 	if (pid == 0)
 	{
-		if (buffer == NULL)
-		{
-				dobfreer(buffer);
-				perror(av);
-				exit(0);
-		}
-		else if ((stat(buffer[0], &stark)) == 0)
-		{
-			execve(buffer[0], buffer, NULL);
-		}
+
+
+		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
+		    execve(buffer[0], buffer, NULL);
 		else
-		{
-			path(buffer, line, env);
-		}
-		
+		    {
+            directory = _path(buffer[0], env);
+            if (execve(directory, buffer, NULL) == -1)
+            {
+                free(directory);
+                perror("Error");
+                exit(EXIT_FAILURE);
+            }
+        }
 		dobfreer(buffer);
 	}
 	else

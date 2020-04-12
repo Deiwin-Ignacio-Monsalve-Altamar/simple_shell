@@ -6,7 +6,8 @@
  * @env:  pointer to environment Variables
  * Return: Always 0.
  */
-int	main(int argc, char **argv, char **env)
+extern char **environ;
+int	main(int argc, char **argv)
 {
 	char *line = NULL, *p = argv[0];
 	int status = 1;
@@ -21,8 +22,8 @@ int	main(int argc, char **argv, char **env)
 		}
 
 		text = getargs(line);
-		status = execute(text, p, line, env);
 		free(line);
+		status = execute(text, p, environ);
 		dobfreer(text);
 	} while (status);
 	free(line);

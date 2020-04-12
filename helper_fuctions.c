@@ -1,133 +1,118 @@
 #include "holberton.h"
 
 /**
- * getargs - divide into arguments
+ * contokens - count the tokens
  * @buff: pointer to string
- * Return: pointer to string with arguments
+ * Return: token numbers
  */
-char **getargs(char *buff)
+
+int contokens(char *buff)
 {
-	char *token, **args;
 	int count;
-	unsigned int i;
+	char *token, *aux_buff;
 
-	buff[_strlen(buff) - 1] = '\0';
-	i = contokens(buff);
-	args = malloc(sizeof(char *) * i);
-	if (args == NULL)
+	aux_buff = _strdup(buff);
+	token = strtok(aux_buff, " \n");
+	for (count = 1; token != NULL; count++)
 	{
-		return (NULL);
+		token = strtok(NULL, " \n");
 	}
-	token = strtok(buff, " ");
-	for (count = 0; token != NULL; count++)
-	{
-		args[count] = malloc(_strlen(token) + 1);
-		if (args[count] == NULL)
-		{
-			dobfreer(args);
-			return (NULL);
-		}
-		strcpy(args[count], token);
-		token = strtok(NULL, " ");
-	}
-	args[count] = NULL;
-	return (args);
-}
-
-
-/**
- * fail_fork - fail fork
- * Return: void
- */
-void fail_fork(void)
-{
-	perror("Error:");
-	exit(EXIT_FAILURE);
+	free(aux_buff);
+	return (count);
 }
 
 /**
- * _strncpy - concatenates two strings
- * @dest: string 1
- * @src: string 2
- * @n: integer
- * Return: dest
+ * _strcmp - compare two strings
+ * @s1: string 1
+ * @s2: string 2
+ * Return: 0 if they are equal or a number less
+ * than 0 if they are different
  */
-
-char *_strncpy(char *dest, char *src, int n)
+int _strcmp(char *s1, char *s2)
 {
 	int x;
 
-	for (x = 0; src[x] != '\0'; x++)
+	for (x = 0; s1[x] != '\0' && s2[x] != '\0'; x++)
 	{
-		if (x < n)
+		if (s1[x] != s2[x])
 		{
-			dest[x] = src[x];
+			return (s1[x] - s2[x]);
 		}
 	}
-	for (; x < n ; x++)
+	return (0);
+}
+/**
+ * prompt - function  that print the prompt
+ * Return: void
+ */
+void prompt(void)
+{
+	if (isatty(STDIN_FILENO))
 	{
-		dest[x] = '\0';
+		write(1, "Holber->$ ", 10);
 	}
-	return (dest);
+}
+/**
+ * _getline - count the tokens
+ * Return: pointer to the data entered by the user
+ */
+char *_getline(void)
+{
+	int tmp;
+	char *line = NULL;
+	size_t size  = 0;
+
+	tmp = getline(&line, &size, stdin);
+	if (tmp == EOF)
+	{
+		if (isatty(STDIN_FILENO))
+			write(1, "\n", 1);
+		free(line);
+		exit(0);
+	}
+	return (line);
 }
 
-
 /**
- * _strlen - count a string
- * @s: string
+ * execute - function  that fork and execute the user input
+ * @buffer: pointer to string with data to execute
+ * @av: string
+ * @line: data entered by userdata entered by user
+ * @env: pointer to Environment Variables
  * Return: int
  */
-
-int _strlen(char *s)
+int execute(char **buffer, char *av, char **env)
 {
-	char aux;
-	int  cont = 0;
+	pid_t pid; struct stat stark;
+	int status; char  *directory;
 
-	aux = s[0];
-	while (aux != '\0')
+	pid = fork();
+	if (pid == -1)
 	{
-		cont++;
-		aux = s[cont];
+		dobfreer(buffer);
+		fail_fork();
 	}
-	return (cont);
-}
-
-/**
- * _strdup - returns a pointer to a newly allocated space in memory,
- * which contains a copy of the string given as a parameter.
- * @str: string
- * Return: pointer to the duplicated string
- */
-
-char *_strdup(char *str)
-{
-	int x, y;
-	char *copy;
-
-	x = 0;
-
-	if (str == NULL)
+	if (pid == 0)
 	{
-		return (NULL);
+
+
+		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
+		    execve(buffer[0], buffer, NULL);
+		else
+		    {
+            directory = _path(buffer[0], env);
+            if (execve(directory, buffer, NULL) == -1)
+            {
+                free(directory);
+                perror("Error");
+                exit(EXIT_FAILURE);
+            }
+        }
+		dobfreer(buffer);
 	}
 	else
 	{
-		while (str[x] != '\0')
-		{
-			x++;
-		}
+		wait(&status);
 	}
-		copy = malloc(sizeof(char) * (x + 1));
-		if (copy == NULL)
-		{
-			return (NULL);
-		}
-		else
-		{
-			for (y = 0; str[y] != 0; y++)
-			{
-				copy[y] = str[y];
-			}
-		}
-	return (copy);
+	return (1);
 }

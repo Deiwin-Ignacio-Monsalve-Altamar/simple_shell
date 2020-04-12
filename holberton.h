@@ -25,7 +25,7 @@ char **getargs(char *buff);
 void fail_fork(void);
 
 /* functions copy a string */
-char *_strncpy(char *dest, char *src, int n);
+char *_strcpy(char *dest, char *src);
 
 /* functions count a string */
 int _strlen(char *s);
@@ -46,17 +46,12 @@ void prompt(void);
 char *_getline(void);
 
 /* function  that fork and execute the user input */
-int execute(char **buffer, char *av, char *line, char **env);
+int execute(char **buffer, char *av, char **env);
 
-void path(char **text, char *buffer, char **env);
+char *_path(char *text, char **env);
 
-char **env_variable(char *text, char **env);
+char *env_variable(char *dir_tmp, char *text);
 
-char *getenv_(const char *name, char *str);
-
-char *_strcpytext(char *dest, char *str, char *text, int len1, int len2);
-char **addpath(char **text, char **env);
-
-int counter(char **env, char **text);
+char *_strcat(char *dest, char *src);
 
 #endif /*_HOLBERTON_H_ */
