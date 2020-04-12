@@ -16,66 +16,76 @@ void dobfreer(char **capt)
 	}
 	free(capt);
 }
-
 /**
- * addpath - add new argument to PAHT copy
- * @text: data entered by the user
- * @env: pointer to environment variables
- * Return: string with arguments to the execute function
+ * *_strcat - print character
+ * @src: pointr character
+ * @dest : poinr character
+ * Return: *char
  */
-char **addpath(char **text, char **env)
+char *_strcat(char *dest, char *src)
 {
-	char *token, *str, *aux, *tmp, **npath;
-	int x = 0, y = 0, z, size;
+    int i, j;
 
-	size = counter(env, text);
-	npath = malloc(sizeof(char *) * size + 1);
-	aux = "PATH";
-	while (env[x])
-	{
-		tmp = _strdup(env[x]);
-		token = strtok(tmp, "=");
-		if (_strcmp(aux, token) == 0)
-		{
-			token = strtok(NULL, "=");
-			str = _strdup(token);
-			token = strtok(str, ":");
-			while (token != NULL)
-			{
-				npath[y] =  token;
-				y++;
-				token = strtok(NULL, ":");
-			}
-			for (z = 0; text[z] != NULL; z++)
-			{
-				npath[y] = text[z];
-				y++;
-			}
-			npath[y] = NULL;
-			free(tmp);
-			free(str);
-			return (npath);
-		}
-		x++;
-		free(tmp);
-	}
-	return (NULL);
+    i = 0;
+    while (dest[i] != '\0')
+    {
+        i++;
+    }
+    dest[i++] = '/';
+    j = 0;
+    while ((dest[i++] = src[j++]) != '\0')
+    {
+    }
+    dest[i++] = '\0';
+    return (dest);
 }
 
-/**
- * counter - calculate size for new string
- * @text: data entered by the user
- * @env: pointer to environment variables
- * Return: zise new stringg
- */
-int counter(char **env, char **text)
-{
-	int ntoken, numtext;
 
-	ntoken = contokens(*env);
-	for (numtext = 0; text[numtext] != NULL; numtext++)
-	{
-		ntoken += 1;
-	}
-	return (ntoken);
+/**
+ * main - execve example
+ *
+ * Return: Always 0.
+ */
+char *env_variable(char *dir_tmp, char *text)
+{
+
+    char *path, *token;
+    struct stat stark;
+
+    token = strtok(dir_tmp, ":");
+    while (token)
+    {
+        path = malloc(_strlen(token) + 1 + _strlen(text) + 1);
+        _strcpy(path, token);
+        _strcat(path, text);
+        if (stat(path, &stark) == 0 && stark.st_mode & S_IXUSR)
+            break;
+        token = strtok(NULL, ":");
+        free(path);
+    }
+    return (path);
+}
+/**
+ * main - execve example
+ *
+ * Return: Always 0.
+ */
+char *_path(char *text, char **env)
+{
+   int i = 0;
+   char *var = "PATH", *path, *token, *env_copy, *dir_tmp;
+
+   while (env[i]) {
+       env_copy = _strdup(env[i]);
+       token = strtok(env_copy, "=");
+       if (_strcmp(token, var) == 0) {
+           token = strtok(NULL, "=");
+           dir_tmp = _strdup(token);
+           path = env_variable(dir_tmp, text);
+           free(dir_tmp);
+       }
+       free(env_copy);
+       i++;
+   }
+    return (path);
 }
