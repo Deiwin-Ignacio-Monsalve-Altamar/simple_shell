@@ -13,7 +13,7 @@ char **getargs(char *buff)
 
 	buff[_strlen(buff) - 1] = '\0';
 	i = contokens(buff);
-	args = malloc(sizeof(char *) * i);
+	args = malloc(sizeof(char *) * (i + 1));
 	if (args == NULL)
 	{
 		return (NULL);

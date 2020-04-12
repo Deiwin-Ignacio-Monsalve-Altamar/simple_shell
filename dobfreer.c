@@ -73,19 +73,24 @@ char *env_variable(char *dir_tmp, char *text)
 char *_path(char *text, char **env)
 {
    int i = 0;
-   char *var = "PATH", *path, *token, *env_copy, *dir_tmp;
+   char *var = "PATH", *path, *token, *env_copy, *dir_tmp, *npath;
 
-   while (env[i]) {
-       env_copy = _strdup(env[i]);
-       token = strtok(env_copy, "=");
-       if (_strcmp(token, var) == 0) {
-           token = strtok(NULL, "=");
-           dir_tmp = _strdup(token);
-           path = env_variable(dir_tmp, text);
-           free(dir_tmp);
-       }
-       free(env_copy);
-       i++;
-   }
-    return (path);
+   while (env[i]) 
+	{
+
+	   env_copy = _strdup(env[i]);
+	   token = strtok(env_copy, "=");
+	   free(env_copy);
+	   if (_strcmp(token, var) == 0) {
+		   token = strtok(NULL, "=");
+		   dir_tmp = _strdup(token);
+		   path = env_variable(dir_tmp, text);
+		    npath = _strdup(path);
+		    free(path);
+		   free(dir_tmp);
+		   return (npath);
+	   }
+	   i++;
+        }
+    return (NULL);
 }
