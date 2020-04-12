@@ -11,27 +11,31 @@ char **getargs(char *buff)
 	int count;
 	unsigned int i;
 
-	buff[_strlen(buff) - 1] = '\0';
-	i = contokens(buff);
-	args = malloc(sizeof(char *) * i);
-	if (args == NULL)
+	if (buff != NULL)
 	{
-		return (NULL);
-	}
-	token = strtok(buff, DELIMI);
-	for (count = 0; token != NULL; count++)
-	{
-		args[count] = malloc(_strlen(token) + 1);
-		if (args[count] == NULL)
+		buff[_strlen(buff) - 1] = '\0';
+		i = contokens(buff);
+		args = malloc(sizeof(char *) * i);
+		if (args == NULL)
 		{
-			dobfreer(args);
 			return (NULL);
 		}
-		_strcpy(args[count], token);
-		token = strtok(NULL, DELIMI);
+		token = strtok(buff, DELIMI);
+		for (count = 0; token != NULL; count++)
+		{
+			args[count] = malloc(_strlen(token) + 1);
+			if (args[count] == NULL)
+			{
+				dobfreer(args);
+				return (NULL);
+			}
+			_strcpy(args[count], token);
+			token = strtok(NULL, DELIMI);
+		}
+		args[count] = NULL;
+		return (args);
 	}
-	args[count] = NULL;
-	return (args);
+	return (NULL);
 }
 
 

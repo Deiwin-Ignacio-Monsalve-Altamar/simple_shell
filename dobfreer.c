@@ -59,11 +59,11 @@ char *env_variable(char *dir_tmp, char *text)
         _strcpy(path, token);
         _strcat(path, text);
         if (stat(path, &stark) == 0 && stark.st_mode & S_IXUSR)
-            break;
+            return (path);
         token = strtok(NULL, ":");
         free(path);
     }
-    return (path);
+    return (NULL);
 }
 /**
  * main - execve example
@@ -72,20 +72,38 @@ char *env_variable(char *dir_tmp, char *text)
  */
 char *_path(char *text, char **env)
 {
-   int i = 0;
-   char *var = "PATH", *path, *token, *env_copy, *dir_tmp;
+   char *path, *dir_tmp;
 
-   while (env[i]) {
-       env_copy = _strdup(env[i]);
-       token = strtok(env_copy, "=");
-       if (_strcmp(token, var) == 0) {
-           token = strtok(NULL, "=");
-           dir_tmp = _strdup(token);
-           path = env_variable(dir_tmp, text);
-           free(dir_tmp);
-       }
-       free(env_copy);
-       i++;
-   }
+    dir_tmp = getenv_("PATH", env);
+    path = env_variable(dir_tmp, text);
+    free(dir_tmp);
     return (path);
+}
+/**
+ * main - execve example
+ *
+ * Return: Always 0.
+ */
+
+char *getenv_(const char *name, char **environ)
+{
+    char *token;
+    int x = 0;
+    char *tmp, *str;
+
+    while (environ[x])
+    {
+        tmp = strdup(environ[x]);
+        token = strtok(tmp, "=");
+        if (strcmp(name, token) == 0)
+        {
+            token = strtok(NULL, "=");
+            str = strdup(token);
+            free(tmp);
+            return (str);
+        }
+        free(tmp);
+        x++;
+    }
+    return (NULL);
 }
