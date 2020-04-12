@@ -1,44 +1,4 @@
-#include "holberton.h"
-
-/**
- * getargs - divide into arguments
- * @buff: pointer to string
- * Return: pointer to string with arguments
- */
-char **getargs(char *buff)
-{
-	char *token, **args;
-	int count;
-	unsigned int i;
-
-	if (buff != NULL)
-	{
-		buff[_strlen(buff) - 1] = '\0';
-		i = contokens(buff);
-		args = malloc(sizeof(char *) * i);
-		if (args == NULL)
-		{
-			return (NULL);
-		}
-		token = strtok(buff, DELIMI);
-		for (count = 0; token != NULL; count++)
-		{
-			args[count] = malloc(_strlen(token) + 1);
-			if (args[count] == NULL)
-			{
-				dobfreer(args);
-				return (NULL);
-			}
-			_strcpy(args[count], token);
-			token = strtok(NULL, DELIMI);
-		}
-		args[count] = NULL;
-		return (args);
-	}
-	return (NULL);
-}
-
-
+v
 /**
  * fail_fork - fail fork
  * Return: void

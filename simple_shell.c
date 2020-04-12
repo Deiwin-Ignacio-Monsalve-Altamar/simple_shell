@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		status = execute(text, p, environ);
 		dobfreer(text);
 	} while (status);
-	free(line);
+	/*free(line);*/
 	dobfreer(text);
 	return (0);
 }
