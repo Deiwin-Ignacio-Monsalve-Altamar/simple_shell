@@ -40,6 +40,31 @@ char *_strcat(char *dest, char *src)
     return (dest);
 }
 
+
+/**
+ * main - execve example
+ *
+ * Return: Always 0.
+ */
+char *env_variable(char *dir_tmp, char *text)
+{
+
+    char *path, *token;
+    struct stat stark;
+
+    token = strtok(dir_tmp, ":");
+    while (token)
+    {
+        path = malloc(_strlen(token) + 1 + _strlen(text) + 1);
+        _strcpy(path, token);
+        _strcat(path, text);
+        if (stat(path, &stark) == 0 && stark.st_mode & S_IXUSR)
+            return (path);
+        token = strtok(NULL, ":");
+        free(path);
+    }
+    return (NULL);
+}
 /**
  * main - execve example
  *
@@ -58,7 +83,6 @@ char *_path(char *text, char **env)
  * main - execve example
  *
  * Return: Always 0.
- * 
  */
 
 char *getenv_(const char *name, char **environ)
