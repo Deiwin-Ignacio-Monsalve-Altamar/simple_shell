@@ -95,21 +95,26 @@ int execute(char **buffer, char *av, char **env)
 	if (pid == 0)
 	{
 
-
 		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
 		{
-		    execve(buffer[0], buffer, NULL);
+		    if (execve(buffer[0], buffer, NULL) == -1)
+			{
+                free(buffer);
+                perror(av);
+                exit(EXIT_FAILURE);
+            }
 		}
 		else
 		    {
-			    directory = _path(buffer[0], env);
-			    if (execve(directory, buffer, NULL) == -1)
-			    {
-				    free(directory);
-				    perror("Error");
-				    exit(EXIT_FAILURE);
-			    }
-        	    }
+            directory = _path(buffer[0], env);
+            if (execve(directory, buffer, NULL) == -1)
+            {
+                free(directory);
+                perror(av);
+                exit(EXIT_FAILURE);
+            }
+        }
+		dobfreer(buffer);
 	}
 	else
 	{
