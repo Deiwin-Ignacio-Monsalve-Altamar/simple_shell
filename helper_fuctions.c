@@ -92,6 +92,7 @@ int _strlen(char *s)
  * which contains a copy of the string given as a parameter.
  * @str: string
  * Return: pointer to the duplicated string
+ * 
  */
 
 char *_strdup(char *str)
