@@ -77,15 +77,15 @@ char *_getline(void)
  * execute - function  that fork and execute the user input
  * @buffer: pointer to string with data to execute
  * @av: string
- * @line: data entered by userdata entered by user
  * @env: pointer to Environment Variables
  * Return: int
- * 
  */
 int execute(char **buffer, char *av, char **env)
 {
-	pid_t pid; struct stat stark;
-	int status; char  *directory;
+	pid_t pid;
+	struct stat stark;
+	int status;
+	char  *directory;
 
 	pid = fork();
 	if (pid == -1)
@@ -98,23 +98,23 @@ int execute(char **buffer, char *av, char **env)
 
 		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
 		{
-		    if (execve(buffer[0], buffer, NULL) == -1)
-	            {
-                	free(buffer);
-                	perror(av);
-                	exit(EXIT_FAILURE);
-                    }
+			if (execve(buffer[0], buffer, NULL) == -1)
+			{
+				free(buffer);
+				perror(av);
+				exit(EXIT_FAILURE);
+			}
 		}
 		else
-		    {
-            directory = _path(buffer[0], env);
-            if (execve(directory, buffer, NULL) == -1)
-            {
-                free(directory);
-                perror(av);
-                exit(EXIT_FAILURE);
-            }
-        }
+		{
+			directory = _path(buffer[0], env);
+			if (execve(directory, buffer, NULL) == -1)
+			{
+				free(directory);
+				perror(av);
+				exit(EXIT_FAILURE);
+			}
+		}
 		dobfreer(buffer);
 	}
 	else
