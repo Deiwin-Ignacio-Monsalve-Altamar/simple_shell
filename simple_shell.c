@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 			free(line);
 			if ((_strcmp(exit_com, text[0])) == 0)
 			{
-				print_exit(text);
+				e_exit(text);
 			}
 			if ((_strcmp(envi, text[0])) == 0)
 			{

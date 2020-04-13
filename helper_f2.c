@@ -99,6 +99,7 @@ int execute(char **buffer, char *av, char **env)
 	pid = fork();
 	if (pid == -1)
 	{
+		free(program);
 		dobfreer(buffer);
 		fail_fork();
 	}
@@ -107,10 +108,12 @@ int execute(char **buffer, char *av, char **env)
 	{
 		if (execve(program, buffer, NULL) == -1)
 		{
+			dobfreer(buffer);
 			free(program);
 			perror(av);
 			exit(EXIT_FAILURE);
 		}
+		free(program);
 		dobfreer(buffer);
 	}
 	else
