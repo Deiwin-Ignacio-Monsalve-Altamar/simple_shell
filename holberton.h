@@ -77,4 +77,6 @@ char *getenv_(const char *name, char **environ);
 /* function  that print environment varibles */
 void printenvi(char **text, char **environ);
 
+void print_exit(char **text, char *line);
+
 #endif /*_HOLBERTON_H_ */
