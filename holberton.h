@@ -67,4 +67,6 @@ char *_strcat(char *dest, char *src);
 
 char *getenv_(const char *name, char **environ);
 
+void printenvi(char **text, char **environ);
+
 #endif /*_HOLBERTON_H_ */

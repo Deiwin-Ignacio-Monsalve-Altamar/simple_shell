@@ -99,11 +99,11 @@ int execute(char **buffer, char *av, char **env)
 		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
 		{
 		    if (execve(buffer[0], buffer, NULL) == -1)
-			{
-                free(buffer);
-                perror(av);
-                exit(EXIT_FAILURE);
-            }
+	            {
+                	free(buffer);
+                	perror(av);
+                	exit(EXIT_FAILURE);
+                    }
 		}
 		else
 		    {
