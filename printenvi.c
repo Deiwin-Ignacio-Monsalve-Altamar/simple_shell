@@ -1,5 +1,11 @@
 #include "holberton.h"
 
+/**
+ * printenvi - print environment variables
+ * @environ: pointer to string array with environment varibles
+ * @text: pointer arrays for free
+ * Return: void
+ */
 void printenvi(char **text, char **environ)
 {
 	unsigned int cont, size;
@@ -12,3 +18,15 @@ void printenvi(char **text, char **environ)
 	}
 	dobfreer(text);
 }
+
+/**
+ * e_exit - produces output of simple_shell
+ * @text: pointer arrays for free
+ * Return: void
+ */
+void e_exit(char **text)
+{
+	dobfreer(text);
+	exit(EXIT_SUCCESS);
+}
+

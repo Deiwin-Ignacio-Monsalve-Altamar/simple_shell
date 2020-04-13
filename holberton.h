@@ -12,13 +12,13 @@
 #include <signal.h>
 #define DELIMI " \n\t\a"
 
+extern char **environ;
 /**
  * struct builtins - has builtins
  * @arg: builtins name
  * @builtin: Mathcing builtin fun
  *
  */
-extern char **environ;
 
 typedef struct builtins
 {
@@ -77,6 +77,7 @@ char *getenv_(const char *name, char **environ);
 /* function  that print environment varibles */
 void printenvi(char **text, char **environ);
 
-void print_exit(char **text, char *line);
+/* produces output of simple_shell */
+void e_exit(char **text);
 
 #endif /*_HOLBERTON_H_ */
