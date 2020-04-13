@@ -3,12 +3,10 @@
  * main - execve example
  * @argc: numbers of arguments
  * @argv: string of arguments
- * @env:  pointer to environment Variables
  * Return: Always 0.
- * 
  */
-extern char **environ;
-int	main(int argc, char **argv)
+
+int main(int argc, char **argv)
 {
 	char *line = NULL, *p = argv[0], *exit_com = "exit", *envi = "env";
 	int status = 1;
@@ -28,7 +26,7 @@ int	main(int argc, char **argv)
 			dobfreer(text);
 			exit(EXIT_SUCCESS);
 		}
-		if ((_strcmp(envi, text[0])) == 0) 
+		if ((_strcmp(envi, text[0])) == 0)
 		{
 			printenvi(text, environ);
 		}

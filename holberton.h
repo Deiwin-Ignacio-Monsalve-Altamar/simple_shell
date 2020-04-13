@@ -11,16 +11,19 @@
 #include <sys/wait.h>
 #include <signal.h>
 #define DELIMI " \n\t\a"
+
 /**
- * struct builts - has builtins
+ * struct builtins - has builtins
  * @arg: builtins name
  * @builtin: Mathcing builtin fun
- * 
+ *
  */
+extern char **environ;
+
 typedef struct builtins
 {
-    char *arg;
-    void (*builtin)(char **args, char line, char **env);
+	char *arg;
+	void (*builtin)(char **args, char line, char **env);
 } buil_t;
 
 /* function free*/
@@ -59,14 +62,19 @@ char *_getline(void);
 /* function  that fork and execute the user input */
 int execute(char **buffer, char *av, char **env);
 
+/* function  that get PATH */
 char *_path(char *text, char **env);
 
+/* string array with PATH directories */
 char *env_variable(char *dir_tmp, char *text);
 
+/* function  that concatenates strings */
 char *_strcat(char *dest, char *src);
 
+/* function  that get the value of the environment variable */
 char *getenv_(const char *name, char **environ);
 
+/* function  that print environment varibles */
 void printenvi(char **text, char **environ);
 
 #endif /*_HOLBERTON_H_ */
