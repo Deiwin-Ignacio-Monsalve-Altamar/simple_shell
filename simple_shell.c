@@ -14,33 +14,32 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-	do {
-		prompt();
-		line = _getline();
-		if ((_strcmp(line, "\n")) == 0)
-		{
-			continue;
-		}
-		text = getargs(line);
+		do {
+			prompt();
+			line = _getline();
+			if ((_strcmp(line, "\n")) == 0)
+			{
+				continue;
+			}
+			text = getargs(line);
+			free(line);
+			if ((_strcmp(exit_com, text[0])) == 0)
+			{
+				print_exit(text);
+			}
+			if ((_strcmp(envi, text[0])) == 0)
+			{
+				printenvi(text, environ);
+			}
+			else
+			{
+				status = execute(text, p, environ);
+				dobfreer(text);
+			}
+		} while (status);
 		free(line);
-		if ((_strcmp(exit_com, text[0])) == 0)
-		{
-			dobfreer(text);
-			exit(EXIT_SUCCESS);
-		}
-		if ((_strcmp(envi, text[0])) == 0)
-		{
-			printenvi(text, environ);
-		}
-		else
-		{
-			status = execute(text, p, environ);
-			dobfreer(text);
-		}
-	} while (status);
-	free(line);
-	dobfreer(text);
-	
+		dobfreer(text);
+
 	}
 	return (0);
 
