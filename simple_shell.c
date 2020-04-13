@@ -12,6 +12,8 @@ int main(int argc, char **argv)
 	int status = 1;
 	char **text;
 
+	if (argc == 1)
+	{
 	do {
 		prompt();
 		line = _getline();
@@ -38,5 +40,8 @@ int main(int argc, char **argv)
 	} while (status);
 	free(line);
 	dobfreer(text);
+	
+	}
 	return (0);
+
 }

@@ -1,6 +1,6 @@
-#include <holberton.h>
+#include "holberton.h"
 
-void _exit(char **text, *line)
+void print_exit(char **text, char *line)
 {
 	free(line);
 	dobfreer(text);

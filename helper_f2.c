@@ -85,7 +85,17 @@ int execute(char **buffer, char *av, char **env)
 	pid_t pid;
 	struct stat stark;
 	int status;
-	char  *directory;
+	char *program;
+
+	if (stat(buffer[0], &stark) == 0)
+	{
+		program = buffer[0];
+	}
+	else
+	{
+		program = _path(buffer[0], env);
+			
+	}
 
 	pid = fork();
 	if (pid == -1)
@@ -93,27 +103,14 @@ int execute(char **buffer, char *av, char **env)
 		dobfreer(buffer);
 		fail_fork();
 	}
+
 	if (pid == 0)
 	{
-
-		if (stat(buffer[0], &stark) == 0 && stark.st_mode & S_IXUSR)
+		if (execve(program, buffer, NULL) == -1)
 		{
-			if (execve(buffer[0], buffer, NULL) == -1)
-			{
-				free(buffer);
-				perror(av);
-				exit(EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			directory = _path(buffer[0], env);
-			if (execve(directory, buffer, NULL) == -1)
-			{
-				free(directory);
-				perror(av);
-				exit(EXIT_FAILURE);
-			}
+			free(program);
+			perror(av);
+			exit(EXIT_FAILURE);
 		}
 		dobfreer(buffer);
 	}
