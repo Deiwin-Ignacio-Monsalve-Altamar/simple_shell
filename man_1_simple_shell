@@ -1,0 +1,40 @@
+.TH "Simple Shell" 1 "09 April 2020" "1.0" "Simple Shell man page"
+
+.SH NAME
+hsh - Simple Shell
+
+.SH SYNOPSIS
+
+.B ./hsh
+[command] [options]
+
+.SH DESCRIPTION
+.B
+simple_shell is a simple implementation of the standard command interpreter for/
+the system that receives commands from standard input and  only a few  standard/
+shell features have been incorporated.
+
+.SH MODES
+.B hsh
+Interactive mode
+.SS
+EXAMPLE:
+$ ls -la
+Non-interactive mode
+.SS
+EXAMPLE:
+$ echo "ls -la" | ./hsh
+
+.SH BUILT-IN COMMANDS
+.B env
+- prints environment
+.B exit
+- exits the hsh - Simple Shell
+
+.SH BUGS
+No known bugs.
+
+Report bugs to https://github.com/Deiwin-Ignacio-Monsalve-Altamar/simple_shell
+ 
+.SH AUTHOR
+Deiwin Monsalve, Nasser Abuchaibe
