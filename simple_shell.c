@@ -10,7 +10,7 @@
 extern char **environ;
 int	main(int argc, char **argv)
 {
-	char *line = NULL, *p = argv[0], *exit_com = "exit";
+	char *line = NULL, *p = argv[0], *exit_com = "exit", *envi = "env";
 	int status = 1;
 	char **text;
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 		{
 			continue;
 		}
-
 		text = getargs(line);
 		free(line);
 		if ((_strcmp(exit_com, text[0])) == 0)
@@ -29,8 +28,15 @@ int	main(int argc, char **argv)
 			dobfreer(text);
 			exit(EXIT_SUCCESS);
 		}
-		status = execute(text, p, environ);
-		dobfreer(text);
+		if ((_strcmp(envi, text[0])) == 0) 
+		{
+			printenvi(text, environ);
+		}
+		else
+		{
+			status = execute(text, p, environ);
+			dobfreer(text);
+		}
 	} while (status);
 	free(line);
 	dobfreer(text);
