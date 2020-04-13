@@ -35,6 +35,6 @@ $ echo "ls -la" | ./hsh
 No known bugs.
 
 Report bugs to https://github.com/Deiwin-Ignacio-Monsalve-Altamar/simple_shell
- 
+
 .SH AUTHOR
 Deiwin Monsalve, Nasser Abuchaibe

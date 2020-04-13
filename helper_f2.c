@@ -94,7 +94,6 @@ int execute(char **buffer, char *av, char **env)
 	else
 	{
 		program = _path(buffer[0], env);
-			
 	}
 
 	pid = fork();
