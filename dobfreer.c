@@ -50,13 +50,13 @@ char *_strcat(char *dest, char *src)
 char *env_variable(char *dir_tmp, char *text)
 {
 
-	char *path, *token;
+	char *path = NULL, *token = NULL;
 	struct stat stark;
 
 	token = strtok(dir_tmp, ":");
 	while (token)
 	{
-		path = malloc(_strlen(token) + 1 + _strlen(text) + 1);
+		path = malloc(_strlen(token) + 1 + _strlen(text) + 2);
 		_strcpy(path, token);
 		_strcat(path, text);
 		if (stat(path, &stark) == 0 && stark.st_mode & S_IXUSR)
@@ -77,7 +77,7 @@ char *env_variable(char *dir_tmp, char *text)
 
 char *_path(char *text, char **env)
 {
-	char *path, *dir_tmp;
+	char *path = NULL, *dir_tmp = NULL;
 
 	dir_tmp = getenv_("PATH", env);
 	path = env_variable(dir_tmp, text);

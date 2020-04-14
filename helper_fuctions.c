@@ -7,14 +7,14 @@
  */
 char **getargs(char *buff)
 {
-	char *token, **args;
+	char *token = NULL, **args = NULL;
 	int count;
 	unsigned int i;
 
 	if (buff != NULL)
 	{
 		buff[_strlen(buff) - 1] = '\0';
-		i = contokens(buff);
+		i = _strlen(buff);
 		args = malloc(sizeof(char *) * i);
 		if (args == NULL)
 		{
@@ -97,7 +97,7 @@ int _strlen(char *s)
 char *_strdup(char *str)
 {
 	int x, y;
-	char *copy;
+	char *copy = NULL;
 
 	x = 0;
 

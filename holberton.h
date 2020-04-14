@@ -80,4 +80,9 @@ void printenvi(char **text, char **environ);
 /* produces output of simple_shell */
 void e_exit(char **text);
 
+int getline_aux(char *buff);
+
+void ctrl_c(int sign);
+
+char **getargs2(char *buff);
 #endif /*_HOLBERTON_H_ */

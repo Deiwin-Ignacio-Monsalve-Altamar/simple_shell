@@ -8,12 +8,14 @@
 
 int main(int argc, char **argv)
 {
-	char *line = NULL, *p = argv[0], *exit_com = "exit", *envi = "env";
+	char *line = NULL, *p = argv[0];
 	int status = 1;
-	char **text;
+	char **text = NULL;
 
 	if (argc == 1)
 	{
+		signal(SIGINT, ctrl_c);
+
 		do {
 			prompt();
 			line = _getline();
@@ -23,23 +25,10 @@ int main(int argc, char **argv)
 			}
 			text = getargs(line);
 			free(line);
-			if ((_strcmp(exit_com, text[0])) == 0)
-			{
-				e_exit(text);
-			}
-			if ((_strcmp(envi, text[0])) == 0)
-			{
-				printenvi(text, environ);
-			}
-			else
-			{
-				status = execute(text, p, environ);
-				dobfreer(text);
-			}
+			status = execute(text, p, environ);
+			dobfreer(text);
 		} while (status);
-		free(line);
 		dobfreer(text);
-
 	}
 	return (0);
 

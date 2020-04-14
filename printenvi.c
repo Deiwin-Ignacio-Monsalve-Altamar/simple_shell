@@ -8,15 +8,19 @@
  */
 void printenvi(char **text, char **environ)
 {
-	unsigned int cont, size;
+	char *envi = "env";
 
-	for (cont = 0; environ[cont] != NULL; cont++)
+	if ((_strcmp(envi, text[0])) == 0)
 	{
-		size = _strlen(environ[cont]);
-		write(STDOUT_FILENO, environ[cont], size);
-		write(STDOUT_FILENO, "\n", 1);
+		unsigned int cont, size;
+
+		for (cont = 0; environ[cont] != NULL; cont++)
+		{
+			size = _strlen(environ[cont]);
+			write(STDOUT_FILENO, environ[cont], size);
+			write(STDOUT_FILENO, "\n", 1);
+		}
 	}
-	dobfreer(text);
 }
 
 /**
@@ -26,7 +30,86 @@ void printenvi(char **text, char **environ)
  */
 void e_exit(char **text)
 {
-	dobfreer(text);
-	exit(EXIT_SUCCESS);
+	char *exit_com = "exit";
+
+	if ((_strcmp(exit_com, text[0])) == 0)
+	{
+		dobfreer(text);
+		exit(EXIT_SUCCESS);
+	}
 }
 
+/**
+ * getline_aux- produces output of simple_shell
+ * @buff: pointer arrays for free
+ * Return: void
+ */
+int getline_aux(char *buff)
+{
+	int i, j;
+	size_t size = 1024;
+	char buf[1023];
+
+	j = read(STDIN_FILENO, buf, size);
+	buff = malloc(sizeof(char) * (j + 1));
+	if (j == 0 || buff == NULL)
+	{
+		return (-1);
+	}
+	i = 0;
+	while (i < j)
+	{
+		buff[i] = buf[i];
+		i++;
+	}
+	buff[i] = '\0';
+	return (0);
+}
+/**
+ * ctrl_c - produces output of simple_shell
+ * @sign: pointer arrays for free
+ * Return: void
+ */
+void ctrl_c(int sign)
+{
+	sign = sign * 1;
+	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "Holber->$ ", 10);
+}
+/**
+ * getargs - divide into arguments
+ * @buff: pointer to string
+ * Return: pointer to string with arguments
+ */
+char **getargs2(char *buff)
+{
+	char *token, **args;
+	int count;
+	unsigned int i;
+
+	if (buff != NULL)
+	{
+		buff[_strlen(buff) - 1] = '\0';
+		i = contokens(buff);
+		args = malloc(sizeof(char *) * i);
+		if (args == NULL)
+		{
+			return (NULL);
+		}
+		token = strtok(buff, "\n");
+		for (count = 0; token != NULL; count++)
+		{
+			args[count] = malloc(_strlen(token) + 1);
+			if (args[count] == NULL)
+			{
+				dobfreer(args);
+				return (NULL);
+			}
+			_strcpy(args[count], token);
+			token = strtok(NULL, "\n");
+		}
+		args[count] = NULL;
+		return (args);
+	}
+	return (NULL);
+}

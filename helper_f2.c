@@ -9,7 +9,7 @@
 int contokens(char *buff)
 {
 	int count;
-	char *token, *aux_buff;
+	char *token = NULL, *aux_buff = NULL;
 
 	aux_buff = _strdup(buff);
 	token = strtok(aux_buff, " \n");
@@ -49,7 +49,7 @@ void prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		write(1, "Holber->$ ", 10);
+		write(STDOUT_FILENO, "Holber->$ ", 10);
 	}
 }
 /**
@@ -72,7 +72,6 @@ char *_getline(void)
 	}
 	return (line);
 }
-
 /**
  * execute - function  that fork and execute the user input
  * @buffer: pointer to string with data to execute
@@ -85,7 +84,10 @@ int execute(char **buffer, char *av, char **env)
 	pid_t pid;
 	struct stat stark;
 	int status;
-	char *program;
+	char *program = NULL;
+
+	e_exit(buffer);
+	printenvi(buffer, env);
 
 	if (stat(buffer[0], &stark) == 0)
 	{
@@ -97,14 +99,13 @@ int execute(char **buffer, char *av, char **env)
 	}
 
 	pid = fork();
-	if (pid == -1)
+	if (pid < 0)
 	{
 		free(program);
 		dobfreer(buffer);
 		fail_fork();
 	}
-
-	if (pid == 0)
+	else if (pid == 0)
 	{
 		if (execve(program, buffer, NULL) == -1)
 		{
