@@ -79,48 +79,47 @@ char *_getline(void)
  * @env: pointer to Environment Variables
  * Return: int
  */
-int execute(char **buffer, char *av, char **env, int cont)
+int execute(char **buffer, char *av, char **env)
 {
 	pid_t pid;
-	int status;
-	int check_int = 0;
+	int status, check;
 	char *program = NULL;
 	struct stat stark;
 
 	e_exit(buffer);
-	printenvi(buffer, env);
+
+	check = printenvi(buffer, env);
+	if (check == 1)
+		return (1);
 
 	if (stat(buffer[0], &stark) == 0)
 	{
-		program = buffer[0];
+		program = _strdup(buffer[0]);
 	}
 	else
 	{
 		program = _path(buffer[0], env);
 		if (program == NULL)
 		{
-			print_error(buffer[0], av, cont);
+			free(program);
+			perror(av);
 			return (1);
 		}
-		check_int++;
 	}
 	pid = fork();
 	if (pid < 0)
 	{
-		free(program);
-		dobfreer(buffer);
 		fail_fork();
 	}
 	else if (pid == 0)
 	{
 		if (execve(program, buffer, NULL) == -1)
 			perror(av);
-		free(program);
-	} else
+	}
+	else
 	{
 		waitpid(pid, &status, 0);
 	}
-	if (check_int != 0)
 		free(program);
 	return (1);
 }

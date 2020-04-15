@@ -36,7 +36,7 @@ char *_strcat(char *dest, char *src)
 	while ((dest[i++] = src[j++]) != '\0')
 	{
 	}
-	dest[i++] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -93,7 +93,7 @@ char *_path(char *text, char **env)
  * Return: string with the value of the environment variable
  */
 
-char *getenv_(const char *name, char **environ)
+char *getenv_(char *name, char **environ)
 {
 	char *token;
 	int x = 0;
@@ -101,12 +101,12 @@ char *getenv_(const char *name, char **environ)
 
 	while (environ[x])
 	{
-		tmp = strdup(environ[x]);
+		tmp = _strdup(environ[x]);
 		token = strtok(tmp, "=");
-		if (strcmp(name, token) == 0)
+		if (_strcmp(name, token) == 0)
 		{
 			token = strtok(NULL, "=");
-			str = strdup(token);
+			str = _strdup(token);
 			free(tmp);
 			return (str);
 		}
