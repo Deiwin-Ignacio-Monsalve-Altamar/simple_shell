@@ -83,16 +83,26 @@ int execute(char **buffer, char *av, char **env)
 {
 	pid_t pid;
 	int status;
+	int check_int = 0;
 	char *program = NULL;
+	struct stat stark;
 
-	program = check(buffer[0], env);
 	e_exit(buffer);
 	printenvi(buffer, env);
 
-	if (program == NULL)
+	if (stat(buffer[0], &stark) == 0)
 	{
-		perror(av);
-		return (1);
+		program = buffer[0];
+	}
+	else
+	{
+		program = _path(buffer[0], env);
+		if (program == NULL)
+		{
+			perror(av);
+			return (1);
+		}
+		check_int++;
 	}
 	pid = fork();
 	if (pid < 0)
@@ -104,18 +114,12 @@ int execute(char **buffer, char *av, char **env)
 	else if (pid == 0)
 	{
 		if (execve(program, buffer, NULL) == -1)
-		{
 			perror(av);
-			free(program);
-			dobfreer(buffer);
-			exit(EXIT_FAILURE);
-		}
 		free(program);
-		dobfreer(buffer);
-	}
-	else
-	{
+	} else {
 		wait(&status);
 	}
+	if (check_int != 0)
+		free(program);
 	return (1);
 }
