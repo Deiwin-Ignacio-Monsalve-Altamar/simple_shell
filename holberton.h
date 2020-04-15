@@ -60,7 +60,7 @@ void prompt(void);
 char *_getline(void);
 
 /* function  that fork and execute the user input */
-int execute(char **buffer, char *av, char **env);
+int execute(char **buffer, char *av, char **env, int cont);
 
 /* function  that get PATH */
 char *_path(char *text, char **env);
@@ -86,5 +86,7 @@ void ctrl_c(int sign);
 
 char **getargs2(char *buff);
 
-char *check(char *buffer, char **env);
+void print_error(char *text, char *av, int cont);
+
+void no_intera(char *p);
 #endif /*_HOLBERTON_H_ */

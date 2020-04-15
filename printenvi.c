@@ -82,18 +82,17 @@ void ctrl_c(int sign)
  * @env: variables entorno
  * Return: pointer to string with arguments
  */
-char *check(char *buffer, char **env)
+void print_error(char *text, char *av, int __attribute__((unused)) cont)
 {
-	struct stat stark;
-	char *program = NULL;
 
-	if (stat(buffer, &stark) == 0)
-	{
-		program = buffer;
-	}
-	else
-	{
-		program = _path(buffer, env);
-	}
-	return (program);
+/* 	int i = _strlen(text);
+	int j = _strlen(av);
+ */
+	write(STDOUT_FILENO, av, _strlen(av));
+	write(STDOUT_FILENO, ": ", 2);
+	write(STDOUT_FILENO, "1", 1);
+	write(STDOUT_FILENO, ": ", 2);
+ 	write(STDOUT_FILENO, text, _strlen(text));
+	write(STDOUT_FILENO, ": ", 2);
+	write(STDOUT_FILENO, "not found\n", 10);
 }

@@ -79,7 +79,7 @@ char *_getline(void)
  * @env: pointer to Environment Variables
  * Return: int
  */
-int execute(char **buffer, char *av, char **env)
+int execute(char **buffer, char *av, char **env, int cont)
 {
 	pid_t pid;
 	int status;
@@ -99,7 +99,7 @@ int execute(char **buffer, char *av, char **env)
 		program = _path(buffer[0], env);
 		if (program == NULL)
 		{
-			perror(av);
+			print_error(buffer[0], av, cont);
 			return (1);
 		}
 		check_int++;
@@ -118,7 +118,7 @@ int execute(char **buffer, char *av, char **env)
 		free(program);
 	} else
 	{
-		wait(&status);
+		waitpid(pid, &status, 0);
 	}
 	if (check_int != 0)
 		free(program);
