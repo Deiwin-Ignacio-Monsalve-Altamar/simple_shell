@@ -66,7 +66,7 @@ char *_getline(void)
 	if (tmp == EOF)
 	{
 		if (isatty(STDIN_FILENO))
-			write(1, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 		free(line);
 		exit(0);
 	}
@@ -82,9 +82,10 @@ char *_getline(void)
 int execute(char **buffer, char *av, char **env)
 {
 	pid_t pid;
-	struct stat stark;
 	int status;
+	int check_int = 0;
 	char *program = NULL;
+	struct stat stark;
 
 	e_exit(buffer);
 	printenvi(buffer, env);
@@ -96,8 +97,13 @@ int execute(char **buffer, char *av, char **env)
 	else
 	{
 		program = _path(buffer[0], env);
+		if (program == NULL)
+		{
+			perror(av);
+			return (1);
+		}
+		check_int++;
 	}
-
 	pid = fork();
 	if (pid < 0)
 	{
@@ -108,18 +114,12 @@ int execute(char **buffer, char *av, char **env)
 	else if (pid == 0)
 	{
 		if (execve(program, buffer, NULL) == -1)
-		{
-			dobfreer(buffer);
-			free(program);
 			perror(av);
-			exit(EXIT_FAILURE);
-		}
 		free(program);
-		dobfreer(buffer);
-	}
-	else
-	{
+	} else {
 		wait(&status);
 	}
+	if (check_int != 0)
+		free(program);
 	return (1);
 }

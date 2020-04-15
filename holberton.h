@@ -85,4 +85,6 @@ int getline_aux(char *buff);
 void ctrl_c(int sign);
 
 char **getargs2(char *buff);
+
+char *check(char *buffer, char **env);
 #endif /*_HOLBERTON_H_ */

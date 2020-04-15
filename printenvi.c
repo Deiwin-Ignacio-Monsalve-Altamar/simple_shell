@@ -77,39 +77,23 @@ void ctrl_c(int sign)
 	write(STDOUT_FILENO, "Holber->$ ", 10);
 }
 /**
- * getargs - divide into arguments
- * @buff: pointer to string
+ * check - divide into arguments
+ * @buffer: pointer to string
+ * @env: variables entorno
  * Return: pointer to string with arguments
  */
-char **getargs2(char *buff)
+char *check(char *buffer, char **env)
 {
-	char *token, **args;
-	int count;
-	unsigned int i;
+	struct stat stark;
+	char *program = NULL;
 
-	if (buff != NULL)
+	if (stat(buffer, &stark) == 0)
 	{
-		buff[_strlen(buff) - 1] = '\0';
-		i = contokens(buff);
-		args = malloc(sizeof(char *) * i);
-		if (args == NULL)
-		{
-			return (NULL);
-		}
-		token = strtok(buff, "\n");
-		for (count = 0; token != NULL; count++)
-		{
-			args[count] = malloc(_strlen(token) + 1);
-			if (args[count] == NULL)
-			{
-				dobfreer(args);
-				return (NULL);
-			}
-			_strcpy(args[count], token);
-			token = strtok(NULL, "\n");
-		}
-		args[count] = NULL;
-		return (args);
+		program = buffer;
 	}
-	return (NULL);
+	else
+	{
+		program = _path(buffer, env);
+	}
+	return (program);
 }
