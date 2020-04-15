@@ -116,7 +116,8 @@ int execute(char **buffer, char *av, char **env)
 		if (execve(program, buffer, NULL) == -1)
 			perror(av);
 		free(program);
-	} else {
+	} else
+	{
 		wait(&status);
 	}
 	if (check_int != 0)
