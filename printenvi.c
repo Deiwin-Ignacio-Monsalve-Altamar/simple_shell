@@ -2,29 +2,28 @@
 
 /**
  * printenvi - print environment variables
- * @environ: pointer to string array with environment varibles
+ * @env: pointer to string array with environment varibles
  * @text: pointer arrays for free
  * Return: void
  */
 int printenvi(char **text, char **env)
 {
-    char *envi = "env";
+	char *envi = "env";
 
-    if ((_strcmp(envi, text[0])) == 0)
-    {
-        unsigned int cont, size;
+	if ((_strcmp(envi, text[0])) == 0)
+	{
+		unsigned int cont, size;
 
-        for (cont = 0; env[cont] != NULL; cont++)
-        {
-            size = _strlen(env[cont]);
-            write(STDOUT_FILENO, env[cont], size);
-            write(STDOUT_FILENO, "\n", 1);
-        }
-        return (1);
-    }
-    return (0);
+		for (cont = 0; env[cont] != NULL; cont++)
+		{
+			size = _strlen(env[cont]);
+			write(STDOUT_FILENO, env[cont], size);
+			write(STDOUT_FILENO, "\n", 1);
+		}
+		return (1);
+	}
+	return (0);
 }
-
 /**
  * e_exit - produces output of simple_shell
  * @text: pointer arrays for free
@@ -32,40 +31,37 @@ int printenvi(char **text, char **env)
  */
 void e_exit(char **text)
 {
-    char *exit_com = "exit";
+	char *exit_com = "exit";
 
-    if ((_strcmp(exit_com, text[0])) == 0)
-    {
-        dobfreer(text);
-        exit(EXIT_SUCCESS);
-    }
+	if ((_strcmp(exit_com, text[0])) == 0)
+	{
+		dobfreer(text);
+		exit(EXIT_SUCCESS);
+	}
 }
 
 /**
- * getline_aux- produces output of simple_shell
- * @buff: pointer arrays for free
- * Return: void
+ * fork_- produces output of simple_shell
+ * @program: pointers array
+ * @buffer: pointer arrays for free
+ * @env: pointers array
+ * @av: pointer arrays for free
+ * Return: integer
  */
-int getline_aux(char *buff)
+void fork_(char *program, char **buffer, char **env, char *av)
 {
-    int i, j;
-    size_t size = 1024;
-    char buf[1023];
+	int status;
+	pid_t pid;
 
-    j = read(STDIN_FILENO, buf, size);
-    buff = malloc(sizeof(char) * (j + 1));
-    if (j == 0 || buff == NULL)
-    {
-        return (-1);
-    }
-    i = 0;
-    while (i < j)
-    {
-        buff[i] = buf[i];
-        i++;
-    }
-    buff[i] = '\0';
-    return (0);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(program, buffer, env) == -1)
+			perror(av);
+	}
+	else
+		waitpid(pid, &status, 0);
+	free(program);
 }
 /**
  * ctrl_c - produces output of simple_shell
@@ -74,7 +70,7 @@ int getline_aux(char *buff)
  */
 void ctrl_c(int sign)
 {
-    sign = sign * 1;
-    write(STDOUT_FILENO, "\n", 1);
-    write(STDOUT_FILENO, "Holber->$ ", 10);
+	sign = sign * 1;
+	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "Holber->$ ", 10);
 }

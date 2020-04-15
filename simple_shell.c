@@ -33,7 +33,6 @@ int main(int argc, char **argv)
 				dobfreer(text);
 				continue;
 			}
-			
 			free(line);
 
 			status = execute(text, p, environ);

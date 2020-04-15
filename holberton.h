@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <signal.h>
-#define DELIMI " \n\t\a"
+#define DELIMI " \t\r\n\a"
 
 extern char **environ;
 /**
@@ -80,7 +80,7 @@ int printenvi(char **text, char **environ);
 /* produces output of simple_shell */
 void e_exit(char **text);
 
-int getline_aux(char *buff);
+void fork_(char *program, char **buffer, char **env, char *av);
 
 void ctrl_c(int sign);
 
