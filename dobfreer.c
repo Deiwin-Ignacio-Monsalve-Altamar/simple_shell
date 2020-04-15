@@ -89,19 +89,18 @@ char *_path(char *text, char **env)
 /**
  * getenv_ - function  that get the value of the environment variable
  * @name: variable name
- * @environ: pointer to environment variable
+ * @env: pointer to environment variable
  * Return: string with the value of the environment variable
  */
-
-char *getenv_(char *name, char **environ)
+char *getenv_(char *name, char **env)
 {
 	char *token;
 	int x = 0;
 	char *tmp, *str;
 
-	while (environ[x])
+	while (env[x])
 	{
-		tmp = _strdup(environ[x]);
+		tmp = _strdup(env[x]);
 		token = strtok(tmp, "=");
 		if (_strcmp(name, token) == 0)
 		{

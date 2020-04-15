@@ -2,7 +2,7 @@
 
 /**
  * getargs - divide into arguments
- * @buff: pointer to string
+ * @line: pointer to string
  * Return: pointer to string with arguments
  */
 char **getargs(char *line)
@@ -17,16 +17,16 @@ char **getargs(char *line)
 		str = _strdup(line);
 		str2 = _strdup(str);
 
-		tok = strtok(str, " \t\r\n\a");
+		tok = strtok(str, DELIMI);
 
 		/* count number of tokens */
 		while (tok != NULL)
 		{
 			i++;
-			tok = strtok(NULL, " \t\r\n\a");
+			tok = strtok(NULL, DELIMI);
 		}
 		array = malloc(sizeof(char *) * (i + 1));
-		tok = strtok(str2, " \t\r\n\a");
+		tok = strtok(str2, DELIMI);
 		i = 0;
 
 		/* fill array with each token */
@@ -34,7 +34,7 @@ char **getargs(char *line)
 		{
 			array[i] = _strdup(tok);
 			i++;
-			tok = strtok(NULL, " \t\r\n\a");
+			tok = strtok(NULL, DELIMI);
 		}
 		array[i] = NULL;
 

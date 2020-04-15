@@ -73,29 +73,24 @@ char *_getline(void)
 	return (line);
 }
 /**
- * execute - function  that fork and execute the user input
- * @buffer: pointer to string with data to execute
- * @av: string
- * @env: pointer to Environment Variables
- * Return: int
+ *execute - function  that fork and execute the user input
+ *@buffer: pointer to string with data to execute
+ *@av: string
+ *@env: pointer to Environment Variables
+ *Return: int
  */
 int execute(char **buffer, char *av, char **env)
 {
-	pid_t pid;
-	int status, check;
+	int check;
 	char *program = NULL;
 	struct stat stark;
 
 	e_exit(buffer);
-
 	check = printenvi(buffer, env);
 	if (check == 1)
 		return (1);
-
 	if (stat(buffer[0], &stark) == 0)
-	{
 		program = _strdup(buffer[0]);
-	}
 	else
 	{
 		program = _path(buffer[0], env);
@@ -106,20 +101,6 @@ int execute(char **buffer, char *av, char **env)
 			return (1);
 		}
 	}
-	pid = fork();
-	if (pid < 0)
-	{
-		fail_fork();
-	}
-	else if (pid == 0)
-	{
-		if (execve(program, buffer, NULL) == -1)
-			perror(av);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-	}
-		free(program);
+	fork_(program, buffer, env, av);
 	return (1);
 }
