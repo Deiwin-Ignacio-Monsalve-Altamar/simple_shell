@@ -5,36 +5,45 @@
  * @buff: pointer to string
  * Return: pointer to string with arguments
  */
-char **getargs(char *buff)
+char **getargs(char *line)
 {
-	char *token = NULL, **args = NULL;
-	int count;
-	unsigned int i;
+	char *str = 0, *str2 = 0;
+	char **array = 0, *tok = 0;
+	int i = 0; /* , j = 0 */
 
-	if (buff != NULL)
+	if (line)
 	{
-		buff[_strlen(buff) - 1] = '\0';
-		i = _strlen(buff);
-		args = malloc(sizeof(char *) * i);
-		if (args == NULL)
+		/* duplicate str to avoid strtok damage and delete /n */
+		str = _strdup(line);
+		str2 = _strdup(str);
+
+		tok = strtok(str, " \t\r\n\a");
+
+		/* count number of tokens */
+		while (tok != NULL)
 		{
-			return (NULL);
+			i++;
+			tok = strtok(NULL, " \t\r\n\a");
 		}
-		token = strtok(buff, DELIMI);
-		for (count = 0; token != NULL; count++)
+		array = malloc(sizeof(char *) * (i + 1));
+		tok = strtok(str2, " \t\r\n\a");
+		i = 0;
+
+		/* fill array with each token */
+		while (tok != NULL)
 		{
-			args[count] = malloc(_strlen(token) + 1);
-			if (args[count] == NULL)
-			{
-				dobfreer(args);
-				return (NULL);
-			}
-			_strcpy(args[count], token);
-			token = strtok(NULL, DELIMI);
+			array[i] = _strdup(tok);
+			i++;
+			tok = strtok(NULL, " \t\r\n\a");
 		}
-		args[count] = NULL;
-		return (args);
+		array[i] = NULL;
+
+		/* free memory */
+		free(str);
+		free(str2);
+		return (array);
 	}
+
 	return (NULL);
 }
 
@@ -45,7 +54,7 @@ char **getargs(char *buff)
  */
 void fail_fork(void)
 {
-	perror("Error:");
+	perror("Error");
 	exit(EXIT_FAILURE);
 }
 
@@ -123,6 +132,7 @@ char *_strdup(char *str)
 			{
 				copy[y] = str[y];
 			}
+			copy[y] = '\0';
 		}
 	return (copy);
 }

@@ -72,10 +72,10 @@ char *env_variable(char *dir_tmp, char *text);
 char *_strcat(char *dest, char *src);
 
 /* function  that get the value of the environment variable */
-char *getenv_(const char *name, char **environ);
+char *getenv_(char *name, char **environ);
 
 /* function  that print environment varibles */
-void printenvi(char **text, char **environ);
+int printenvi(char **text, char **environ);
 
 /* produces output of simple_shell */
 void e_exit(char **text);
@@ -86,5 +86,6 @@ void ctrl_c(int sign);
 
 char **getargs2(char *buff);
 
-char *check(char *buffer, char **env);
+void print_error(char *text, char *av, int cont);
+
 #endif /*_HOLBERTON_H_ */

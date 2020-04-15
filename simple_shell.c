@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 	{
+
 		signal(SIGINT, ctrl_c);
 
 		do {
@@ -21,15 +22,27 @@ int main(int argc, char **argv)
 			line = _getline();
 			if ((_strcmp(line, "\n")) == 0)
 			{
+				free(line);
 				continue;
 			}
+
 			text = getargs(line);
+			if (text[0] == NULL)
+			{
+				free(line);
+				dobfreer(text);
+				continue;
+			}
+			
 			free(line);
+
 			status = execute(text, p, environ);
+
 			dobfreer(text);
+
 		} while (status);
-		dobfreer(text);
 	}
+
 	return (0);
 
 }
