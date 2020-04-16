@@ -36,7 +36,7 @@ void e_exit(char **text)
 	if ((_strcmp(exit_com, text[0])) == 0)
 	{
 		dobfreer(text);
-		exit(EXIT_SUCCESS);
+		exit(0);
 	}
 }
 
@@ -73,4 +73,22 @@ void ctrl_c(int sign)
 	sign = sign * 1;
 	write(STDOUT_FILENO, "\n", 1);
 	write(STDOUT_FILENO, "Holber->$ ", 10);
+}
+/**
+ * print_e - produces output of simple_shell
+ * @av: pointer arrays for free
+ * @buffer: pointer arrays for free
+ * @cont: integer point
+ * Return: void
+ */
+int print_e(char *av, char *buffer, int cont)
+{
+
+	write(STDERR_FILENO, av, _strlen(av));
+	write(STDERR_FILENO, ": ", 2);
+	print(cont);
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, buffer, _strlen(buffer));
+	write(STDERR_FILENO, ": not found\n", 12);
+	return (127);
 }
