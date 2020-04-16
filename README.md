@@ -138,5 +138,5 @@ Simple Shell Files:
 
 ## Autors
 
-***Deiwin Ignacio Monsalve Altamar - <https://github.com/Deiwin-Ignacio-Monsalve-Altamar>***
-***Nasser Abraham Abuchaibe Gonzalez - <https://github.com/NasserAbuchaibe>***
+-   ***Deiwin Ignacio Monsalve Altamar - <https://github.com/Deiwin-Ignacio-Monsalve-Altamar>***
+-   ***Nasser Abraham Abuchaibe Gonzalez - <https://github.com/NasserAbuchaibe>***
