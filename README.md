@@ -84,7 +84,7 @@ Simple Shell Files:
 | helper_f2.c | It contains other help functions such as: ***_strcmp, _prompt, _getline***
 | dobfreer.c | Contains function that frees memory: ***dobfreer*** and functions that handle environment/path
 | _strtok.c | Contains function that store commands in double pointer: ***_strtok, _strspn***
-| man_3_simple_shell | man page
+| man_1_simple_shell | man page simple_shell
 
  ## Requirements project
 
