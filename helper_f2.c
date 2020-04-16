@@ -77,15 +77,15 @@ char *_getline(void)
  *@buffer: pointer to string with data to execute
  *@av: string
  *@env: pointer to Environment Variables
+ *@cont: integr
  *Return: int
  */
-int execute(char **buffer, char *av, char **env)
+int execute(char **buffer, char *av, char **env, int cont)
 {
 	int check;
 	char *program = NULL;
 	struct stat stark;
 
-	e_exit(buffer);
 	check = printenvi(buffer, env);
 	if (check == 1)
 		return (1);
@@ -97,7 +97,7 @@ int execute(char **buffer, char *av, char **env)
 		if (program == NULL)
 		{
 			free(program);
-			perror(av);
+			print_e(av, buffer[0], cont);
 			return (1);
 		}
 	}

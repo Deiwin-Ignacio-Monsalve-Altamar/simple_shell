@@ -13,18 +13,8 @@
 #define DELIMI " \t\r\n\a"
 
 extern char **environ;
-/**
- * struct builtins - has builtins
- * @arg: builtins name
- * @builtin: Mathcing builtin fun
- *
- */
-
-typedef struct builtins
-{
-	char *arg;
-	void (*builtin)(char **args, char line, char **env);
-} buil_t;
+/* print error mesagge in function*/
+int print_e(char *av, char *buffer, int cont);
 
 /* function free*/
 void freerror1(char *buff);
@@ -60,7 +50,7 @@ void prompt(void);
 char *_getline(void);
 
 /* function  that fork and execute the user input */
-int execute(char **buffer, char *av, char **env);
+int execute(char **buffer, char *av, char **env, int cont);
 
 /* function  that get PATH */
 char *_path(char *text, char **env);
@@ -80,12 +70,14 @@ int printenvi(char **text, char **environ);
 /* produces output of simple_shell */
 void e_exit(char **text);
 
+/* creation of children and wait father*/
 void fork_(char *program, char **buffer, char **env, char *av);
 
 void ctrl_c(int sign);
 
 char **getargs2(char *buff);
 
-void print_error(char *text, char *av, int cont);
+void print(long n);
 
+int _putchar(char c);
 #endif /*_HOLBERTON_H_ */

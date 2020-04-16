@@ -46,18 +46,17 @@ char **getargs(char *line)
 
 	return (NULL);
 }
-
-
 /**
- * fail_fork - fail fork
- * Return: void
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-void fail_fork(void)
+int _putchar(char c)
 {
-	perror("Error");
-	exit(EXIT_FAILURE);
+	return (write(3, &c, 1));
 }
-
 /**
  * *_strcpy - print character
  * @src: pointr character
@@ -81,7 +80,6 @@ char *_strcpy(char *dest, char *src)
  * @s: string
  * Return: int
  */
-
 int _strlen(char *s)
 {
 	char aux;
