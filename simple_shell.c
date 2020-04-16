@@ -39,7 +39,6 @@ int main(int argc, char **argv)
 			status = execute(text, p, environ, cont);
 
 			dobfreer(text);
-
 		} while (status);
 	}
 	return (status);

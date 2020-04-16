@@ -71,7 +71,7 @@ int printenvi(char **text, char **environ);
 void e_exit(char **text);
 
 /* creation of children and wait father*/
-void fork_(char *program, char **buffer, char **env, char *av);
+int fork_(char *program, char **buffer, char **env, char *av);
 
 void ctrl_c(int sign);
 
