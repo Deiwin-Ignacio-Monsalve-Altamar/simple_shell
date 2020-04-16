@@ -11,18 +11,19 @@ Simple Shell was built and tested in the Ubuntu 14.04 LTS via Vagrant in Virtual
 
 ## Instructions
 
--   Compiling the program: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+-   Compiling the program: `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 
 -   Interactive mode:
-
+```
 $ ./hsh
 ($) /bin/ls
 hsh main.c shell.c
 ($)
 ($) exit
 $
-
+```
 -   Non-interactie mode:
+```
 $ echo "/bin/ls" | ./hsh
 hsh main.c shell.c test_ls_2
 $
@@ -34,9 +35,10 @@ $ cat test_ls_2 | ./hsh
 hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
 $
+```
 
 ## Example
-
+```
 usuario@usuario-Latitude-E5440:~/simple_shell$ gcc -Wextra -Werror -Wall -pedantic *.c -g -o hsh
 usuario@usuario-Latitude-E5440:~/simple_shell$ ./hsh
 Holber->$ pwd
@@ -66,20 +68,22 @@ Holber->$ ltewe
 ./hsh: 5: ltewe: not found
 Holber->$ exit
 usuario@usuario-Latitude-E5440:~/simple_shell$ 
+```
 
 ## Respository Contenst
 
 Simple Shell Files:
 
 | File | Description
+| ------------- |:-------------:|
 | hoberton.h | Header file that contains all the functions and standard C library header file
 | simple_shell.c | Contains the int main(int argc, char **argv, char **env)
-| printenvi.c | It contains the functions: *** printenvi, e_exit, fork. ***
-| other_functions.c | Contains functions of help : *** print number ***
+| printenvi.c | It contains the functions: ***printenvi, e_exit, fork.***
+| other_functions.c | Contains functions of help : ***print number***
 | helper_functions.c |  Contains functions that handle all child proccess functionality: *** _getargs, _strlen, _strcpy, _putchar
-| helper_f2.c | It contains other help functions such as: *** _strcmp, _prompt, _getline***
-| dobfreer.c | Contains function that frees memory: *** dobfreer *** and functions that handle environment/path
-| _strtok.c | Contains function that store commands in double pointer: *** _strtok, _strspn ***
+| helper_f2.c | It contains other help functions such as: ***_strcmp, _prompt, _getline***
+| dobfreer.c | Contains function that frees memory: ***dobfreer*** and functions that handle environment/path
+| _strtok.c | Contains function that store commands in double pointer: ***_strtok, _strspn***
 | man_3_simple_shell | man page
 
  ## Requirements project
@@ -130,9 +134,9 @@ Simple Shell Files:
 
 ### 22. What happens when you type ls -l in the shell mandat
 -   blog post describing step by step what happens when you type ls -l and hit Enter in a shell.
--   *** <https://www.linkedin.com/pulse/how-we-made-our-own-shell-nasser-abuchaibe> ***
+-   ***<https://www.linkedin.com/pulse/how-we-made-our-own-shell-nasser-abuchaibe>***
 
 ## Autors
 
-*** Deiwin Ignacio Monsalve Altamar - <https://github.com/Deiwin-Ignacio-Monsalve-Altamar> ***
-*** Nasser Abraham Abuchaibe Gonzalez - <https://github.com/NasserAbuchaibe> ***
+***Deiwin Ignacio Monsalve Altamar - <https://github.com/Deiwin-Ignacio-Monsalve-Altamar>***
+***Nasser Abraham Abuchaibe Gonzalez - <https://github.com/NasserAbuchaibe>***
