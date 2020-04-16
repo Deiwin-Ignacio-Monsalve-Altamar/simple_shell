@@ -11,19 +11,19 @@ Simple Shell was built and tested in the Ubuntu 14.04 LTS via Vagrant in Virtual
 
 ## Instructions
 
--   Compiling the program: 'gcc -Wall -Werror -Wextra -pedantic *.c -o hsh'
+-   Compiling the program: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 -   Interactive mode:
 
-'$ ./hsh
+$ ./hsh
 ($) /bin/ls
 hsh main.c shell.c
 ($)
 ($) exit
-$'
+$
 
 -   Non-interactie mode:
-'$ echo "/bin/ls" | ./hsh
+$ echo "/bin/ls" | ./hsh
 hsh main.c shell.c test_ls_2
 $
 $ cat test_ls_2
@@ -33,11 +33,11 @@ $
 $ cat test_ls_2 | ./hsh
 hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
-$'
+$
 
 ## Example
 
-'usuario@usuario-Latitude-E5440:~/simple_shell$ gcc -Wextra -Werror -Wall -pedantic *.c -g -o hsh
+usuario@usuario-Latitude-E5440:~/simple_shell$ gcc -Wextra -Werror -Wall -pedantic *.c -g -o hsh
 usuario@usuario-Latitude-E5440:~/simple_shell$ ./hsh
 Holber->$ pwd
 /home/usuario/simple_shell
@@ -66,7 +66,7 @@ Holber->$ ltewe
 ./hsh: 5: ltewe: not found
 Holber->$ exit
 usuario@usuario-Latitude-E5440:~/simple_shell$ 
-'
+
 ## Respository Contenst
 
 Simple Shell Files:
