@@ -12,10 +12,10 @@ int contokens(char *buff)
 	char *token = NULL, *aux_buff = NULL;
 
 	aux_buff = _strdup(buff);
-	token = strtok(aux_buff, " \n");
+	token = _strtok(aux_buff, " \n");
 	for (count = 1; token != NULL; count++)
 	{
-		token = strtok(NULL, " \n");
+		token = _strtok(NULL, " \n");
 	}
 	free(aux_buff);
 	return (count);

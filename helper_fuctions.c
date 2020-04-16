@@ -17,16 +17,16 @@ char **getargs(char *line)
 		str = _strdup(line);
 		str2 = _strdup(str);
 
-		tok = strtok(str, DELIMI);
+		tok = _strtok(str, DELIMI);
 
 		/* count number of tokens */
 		while (tok != NULL)
 		{
 			i++;
-			tok = strtok(NULL, DELIMI);
+			tok = _strtok(NULL, DELIMI);
 		}
 		array = malloc(sizeof(char *) * (i + 1));
-		tok = strtok(str2, DELIMI);
+		tok = _strtok(str2, DELIMI);
 		i = 0;
 
 		/* fill array with each token */
@@ -34,7 +34,7 @@ char **getargs(char *line)
 		{
 			array[i] = _strdup(tok);
 			i++;
-			tok = strtok(NULL, DELIMI);
+			tok = _strtok(NULL, DELIMI);
 		}
 		array[i] = NULL;
 
