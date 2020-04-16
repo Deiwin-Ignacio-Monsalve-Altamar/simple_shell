@@ -48,7 +48,7 @@ void e_exit(char **text)
  * @av: pointer arrays for free
  * Return: integer
  */
-void fork_(char *program, char **buffer, char **env, char *av)
+int fork_(char *program, char **buffer, char **env, char *av)
 {
 	int status;
 	pid_t pid;
@@ -62,6 +62,7 @@ void fork_(char *program, char **buffer, char **env, char *av)
 	else
 		waitpid(pid, &status, 0);
 	free(program);
+	return (status);
 }
 /**
  * ctrl_c - produces output of simple_shell

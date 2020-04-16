@@ -77,7 +77,7 @@ char *_getline(void)
  *@buffer: pointer to string with data to execute
  *@av: string
  *@env: pointer to Environment Variables
- *@cont: integr
+ *@cont:integer
  *Return: int
  */
 int execute(char **buffer, char *av, char **env, int cont)
