@@ -80,4 +80,11 @@ char **getargs2(char *buff);
 void print(long n);
 
 int _putchar(char c);
+
+char *_strtok(char *s, const char *del);
+
+unsigned int _strspn(char *s, const char *accept);
+
+char *_strpbrk(char *s, const char *accept);
+
 #endif /*_HOLBERTON_H_ */
