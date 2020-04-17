@@ -3,7 +3,7 @@
  * _strtok - breaks string str into a series of tokens using the delimiter del
  * @s: string to modified and broken into smaller strings (tokens).
  * @del: string containing the delimiters.
- * Return: pointer to the first token found in the string. A null pointer is 
+ * Return: pointer to the first token found in the string. A null pointer is
  * returned if there are no tokens left to retrieve.
  */
 char *_strtok(char *s, const char *del)
@@ -11,7 +11,7 @@ char *_strtok(char *s, const char *del)
 	char *token = NULL;
 	static char *ptr;
 
-	 if (s == NULL)
+	if (s == NULL)
 	{
 		s = ptr;
 		if (s == NULL)
@@ -33,7 +33,7 @@ char *_strtok(char *s, const char *del)
 	else
 		ptr = NULL;
 	return (token);
-	
+
 }
 
 /**
