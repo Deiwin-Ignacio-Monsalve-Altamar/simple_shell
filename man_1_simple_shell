@@ -16,31 +16,31 @@ shell features have been incorporated.
 
 .B Overview
 
-The simple shell is a simplified iteration of a command line interpreter, similar to 
-.B bash or 
-.B dash. 
+The simple shell is a simplified iteration of a command line interpreter, similar to
+.B bash or
+.B dash.
 .I FORMAT [ARGUMENT]...
 .SH OPTIONS
 .B Simple Shell
-operates in both 
-.I interactive 
-and 
+operates in both
+.I interactive
+and
 .I non-interactive
- mode. The user may initiate 
+ mode. The user may initiate
 .B simple shell
-and begin working or initate 
+and begin working or initate
 .B simple shell
 using commands meant to be run by the program.
 .SH ARGUMENTS
-The first argument, argument 0 is understood to be the command to be run by 
+The first argument, argument 0 is understood to be the command to be run by
 .B simple shell
 and arguments following as modifiers or options.
 .SH INVOCATION
 .B simple shell
-may be invoked with the same functionality in 
-.I interactive 
-or 
-.I non-interactive 
+may be invoked with the same functionality in
+.I interactive
+or
+.I non-interactive
 mode.  The user may quit the program by typing "exit", "Ctrl + D", or "Ctrl + C" on the command line.
 When the program quits or a command has been executed,
 

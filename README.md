@@ -67,7 +67,7 @@ ls: no se puede acceder a '.l': No existe el archivo o el directorio
 Holber->$ ltewe
 ./hsh: 5: ltewe: not found
 Holber->$ exit
-usuario@usuario-Latitude-E5440:~/simple_shell$ 
+usuario@usuario-Latitude-E5440:~/simple_shell$
 ```
 
 ## Respository Contenst
@@ -101,7 +101,7 @@ Simple Shell Files:
 
 ## Tasks
 
-### 0. README, man, AUTHORS 
+### 0. README, man, AUTHORS
 -   Write a README
 -   Write a man for your shell.
 -   You should have an AUTHORS file at the root of your repository, listing all
@@ -109,7 +109,7 @@ Simple Shell Files:
 ### 1. Betty would be proud
 -   Write a beautiful code that passes the Betty checks
 
-### 3. Simple shell 0.1 
+### 3. Simple shell 0.1
 -   Write a UNIX command line interpreter.
 
 ### 5. Simple shell 0.2
@@ -122,7 +122,7 @@ Simple Shell Files:
 ### 7. Simple shell 0.3
 -   Simple shell 0.2 +
 
-### 8. Simple shell 0.4 
+### 8. Simple shell 0.4
 -   Simple shell 0.3 +
 -   Implement the exit built-in, that exits the shell
 -   Usage: exit
