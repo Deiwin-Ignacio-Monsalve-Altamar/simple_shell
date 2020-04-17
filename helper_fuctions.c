@@ -17,16 +17,16 @@ char **getargs(char *line)
 		str = _strdup(line);
 		str2 = _strdup(str);
 
-		tok = _strtok(str, DELIMI);
+		tok = strtok(str, DELIMI);
 
 		/* count number of tokens */
 		while (tok != NULL)
 		{
 			i++;
-			tok = _strtok(NULL, DELIMI);
+			tok = strtok(NULL, DELIMI);
 		}
 		array = malloc(sizeof(char *) * (i + 1));
-		tok = _strtok(str2, DELIMI);
+		tok = strtok(str2, DELIMI);
 		i = 0;
 
 		/* fill array with each token */
@@ -34,7 +34,7 @@ char **getargs(char *line)
 		{
 			array[i] = _strdup(tok);
 			i++;
-			tok = _strtok(NULL, DELIMI);
+			tok = strtok(NULL, DELIMI);
 		}
 		array[i] = NULL;
 
@@ -96,7 +96,9 @@ int _strlen(char *s)
 
 /**
  * _strdup - returns a pointer to a newly allocated space in memory,
- * which contains a copy of the string given as a parameter.
+ * which contains a copy o	sign = sign * 1;
+ * write(STDOUT_FILENO, "\n", 1);
+ * write(STDOUT_FILENO, "Holber->$ ", 10);f the string given as a parameter.
  * @str: string
  * Return: pointer to the duplicated string
  */
